@@ -14,8 +14,8 @@ function Landing({}: Props) {
   return (
     <>
       <Navbar
-        selectedPage={selectedPage}
         isTopOfPage={isTopOfPage}
+        selectedPage={selectedPage}
         setSelectedPage={setSelectedPage}
       />
       {/* <Home /> */}
