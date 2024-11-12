@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { SelectedPage } from "@/lib/types";
+import Link from "./Link";
 
 
 interface Props {
@@ -26,7 +27,29 @@ function Navbar({ selectedPage, isTopOfPage, setSelectedPage }: Props) {
         {/* List */}
 
      
-        <section></section>
+        <section>
+        <Link
+          page='Home'
+          selectedPage={selectedPage}
+          setSelectedPage={setSelectedPage}
+        />
+        <Link
+          page='About Us'
+          selectedPage={selectedPage}
+          setSelectedPage={setSelectedPage}
+        />
+        <Link
+          page='Classes'
+          selectedPage={selectedPage}
+          setSelectedPage={setSelectedPage}
+        />
+        <Link
+          page='Contact'
+          selectedPage={selectedPage}
+          setSelectedPage={setSelectedPage}
+        />
+
+        </section>
         {/* Buttons */}
         <section>
           <div>buttons</div>
