@@ -10,6 +10,13 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
+			hotpink: '#cf51bc',
+			darkpurple: '#292660',
+			purple : '#915092',
+			lightpurple : '#ceacc8',
+			turquoise : '#adcfcd',
+			lightturquoise : '#d8edeb',
+
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
