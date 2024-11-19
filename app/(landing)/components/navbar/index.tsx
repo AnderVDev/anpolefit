@@ -1,7 +1,9 @@
 import React from "react";
 import Image from "next/image";
+import Logo from "@/assets/LogoAnpolefit_1.png"
 import { SelectedPage } from "@/lib/types";
 import Link from "./Link";
+import { generalContent, mainBackground } from "@/lib/styles";
 
 
 interface Props {
@@ -15,14 +17,13 @@ function Navbar({ selectedPage, isTopOfPage, setSelectedPage }: Props) {
   const navbarBackground = isTopOfPage ? "" : "bg-primary-100 drop-shadow";
 
   return (
-    <nav>
+    <nav className={`${generalContent} bg-darkpurple`}>
       <div
         className={`${flexBetween} ${navbarBackground} fixed top-0 z-30 w-full py-8`}
       >
         {/* Logo */}
         <section>
-          <div>img</div>
-          {/* <Image src="#" width={500} height={500} alt="Picture of Anpolefit" /> */}
+          <a href="#"><Image src={Logo} alt="Logo" width={200} /></a>
         </section>
         {/* List */}
 

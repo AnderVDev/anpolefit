@@ -1,6 +1,12 @@
 "use client"
 import React, { useState } from "react";
 import Home from "./scenes/home";
+import AboutUs from "./scenes/aboutus";
+import Classes from "./scenes/classes";
+import Contact from "./scenes/contact";
+import Footer from "./components/footer";
+import { generalContent, mainBackground } from "@/lib/styles";
+
 import Navbar from "./components/navbar";
 import { SelectedPage } from "@/lib/types";
 
@@ -13,12 +19,19 @@ function Landing({}: Props) {
   );
   return (
     <>
+    <body className={`${mainBackground} bg-hotpink`}>
       <Navbar
         isTopOfPage={isTopOfPage}
         selectedPage={selectedPage}
         setSelectedPage={setSelectedPage}
       />
-      {/* <Home /> */}
+      <Home />
+      <AboutUs />
+      <Classes />
+      <Contact />
+      <Footer />
+
+     </body>
     </>
   );
 }
