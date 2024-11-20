@@ -5,7 +5,7 @@ import AboutUs from "./scenes/aboutus";
 import Classes from "./scenes/classes";
 import Contact from "./scenes/contact";
 import Footer from "./components/footer";
-import { generalContent, mainBackground } from "@/lib/styles";
+import {mainBackground } from "@/lib/styles";
 
 import Navbar from "./components/navbar";
 import { SelectedPage } from "@/lib/types";
