@@ -1,15 +1,57 @@
-"use client"
-import React, { useState } from "react";
+"use client";  // Esto marca el archivo como un Componente de Cliente
+import React, { useEffect, useState } from "react";
 import Home from "./scenes/home";
 import AboutUs from "./scenes/aboutus";
 import Classes from "./scenes/classes";
 import Contact from "./scenes/contact";
 import Footer from "./components/footer";
-import {mainBackground } from "@/lib/styles";
+import {mainBackground} from "@/lib/styles";
 
 import Navbar from "./components/navbar";
 import { SelectedPage } from "@/lib/types";
 
+
+function App() {
+  const [selectedPage, setSelectedPage] = useState<SelectedPage>(
+    SelectedPage.Home,
+  );
+  const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY === 0) {
+        setIsTopOfPage(true);
+        setSelectedPage(SelectedPage.Home);
+      }
+      if (window.scrollY !== 0) setIsTopOfPage(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  });
+
+  return (
+    <>
+    <body className={`${mainBackground}`}>
+      <div className="app bg-gray-20">
+        <Navbar
+          isTopOfPage={isTopOfPage}
+          selectedPage={selectedPage}
+          setSelectedPage={setSelectedPage}
+        />
+        <Home setSelectedPage={setSelectedPage} />
+        <AboutUs setSelectedPage={setSelectedPage} />
+        <Classes setSelectedPage={setSelectedPage} />
+        <Contact setSelectedPage={setSelectedPage} />
+        <Footer />
+
+      </div>
+      </body>
+    </>
+  );
+}
+
+export default App;
+/*
 type Props = {};
 
 function Landing({}: Props) {
@@ -19,21 +61,21 @@ function Landing({}: Props) {
   );
   return (
     <>
-    <body className={`${mainBackground} bg-hotpink`}>
-      <Navbar
+    <body className={`${mainBackground}`}>
+      <Navbar 
         isTopOfPage={isTopOfPage}
         selectedPage={selectedPage}
         setSelectedPage={setSelectedPage}
+        
       />
-      <Home />
-      <AboutUs />
-      <Classes />
-      <Contact />
-      <Footer />
+        <Home setSelectedPage={setSelectedPage} />
+        <AboutUs setSelectedPage={setSelectedPage} />
+        <Classes setSelectedPage={setSelectedPage} />
+        <Contact setSelectedPage={setSelectedPage} />
+        <Footer />
 
      </body>
     </>
   );
-}
+}*/
 
-export default Landing;

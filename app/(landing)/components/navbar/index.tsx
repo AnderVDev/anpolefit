@@ -1,6 +1,6 @@
 import { SelectedPage } from "@/lib/types";
 import { Link } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ActionButton from "../../shared/ActionButton";
 import Image from 'next/image';
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -18,22 +18,21 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
   const navbarBackground = isTopOfPage ? "" : "bg-primary-100 drop-shadow";
 
   return (
-    <nav>
-  <div className={`${navbarBackground} ${flexBetween} fixed top-0 z-30 w-full py-8`}>
-    <section className={`${flexBetween} mx-auto w-5/6`}>
-      <section className={`${flexBetween} w-full gap-16`}>
-        {/* LEFT SIDE NAVBAR */}
-        <Image src="/assets/Logo1.png"
-          alt="logo" 
-          width={150} // Set appropriate width
-          height={50} // Set appropriate height
-        />
+    <nav className="w-10/12">
+      <div className={`${navbarBackground} ${flexBetween} fixed top-0 z-30 w-full py-8`}>
+        <div className={`${flexBetween}  mx-auto w-5/6`}>
+          <div className={`${flexBetween} w-full gap-16`}>
+            {/* LEFT SIDE NAVBAR */}
+            <Image src="/assets/Logo1.png"
+              alt="logo" 
+              width={180} // Set appropriate width
+              height={70} // Set appropriate height
+            />
 
-        {/* RIGHT SIDE NAVBAR */}
-        {isAboveMediumScreens ? (
-          <section className={`${flexBetween} w-full`}>
-            <div className={`${flexBetween} gap-8 text-sm`}>
-
+            {/* RIGHT SIDE NAVBAR */}
+            {isAboveMediumScreens ? (
+              <div className={`${flexBetween} w-full`}>
+                <div className={`${flexBetween} gap-8 text-sm`}>
                   <Link
                     page="Home"
                     selectedPage={selectedPage}
@@ -61,7 +60,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
                     Become a Member
                   </ActionButton>
                 </div>
-              </section>
+              </div>
             ) : (
               <button
                 className="rounded-full bg-secondary-500 p-2"
@@ -70,9 +69,10 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
                 <Bars3Icon className="h-6 w-6 text-white" />
               </button>
             )}
-          </section>
-        </section>
+          </div>
+        </div>
       </div>
+
       {/* MOBILE MENU MODAL */}
       {!isAboveMediumScreens && isMenuToggled && (
         <aside className="fixed bottom-0 right-0 z-40 h-full w-[300px] bg-primary-100 drop-shadow-xl">
@@ -114,6 +114,22 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
 export default Navbar;
 
 function useMediaQuery(query: string): boolean {
-  if (typeof window === "undefined") return false;
-  return window.matchMedia(query).matches;
+  const [matches, setMatches] = useState<boolean>(false);
+
+  useEffect(() => {
+    const mediaQueryList = window.matchMedia(query);
+    setMatches(mediaQueryList.matches);
+
+    const handler = (event: MediaQueryListEvent) => {
+      setMatches(event.matches);
+    };
+
+    mediaQueryList.addEventListener("change", handler);
+
+    return () => {
+      mediaQueryList.removeEventListener("change", handler);
+    };
+  }, [query]);
+
+  return matches;
 }

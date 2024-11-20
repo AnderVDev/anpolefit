@@ -11,7 +11,7 @@ const config: Config = {
   	extend: {
   		colors: {
 			hotpink: '#cf51bc',
-			darkpurple: '#292660',
+			darkpurple: '#2b1f51',
 			purple : '#915092',
 			lightpurple : '#ceacc8',
 			turquoise : '#adcfcd',
