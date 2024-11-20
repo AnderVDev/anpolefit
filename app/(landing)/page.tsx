@@ -1,11 +1,10 @@
-"use client";  // Esto marca el archivo como un Componente de Cliente
+"use client";
 import React, { useEffect, useState } from "react";
 import Home from "./scenes/home";
 import AboutUs from "./scenes/aboutus";
 import Classes from "./scenes/classes";
 import Contact from "./scenes/contact";
 import Footer from "./components/footer";
-import {mainBackground} from "@/lib/styles";
 
 import Navbar from "./components/navbar";
 import { SelectedPage } from "@/lib/types";
@@ -31,8 +30,8 @@ function App() {
 
   return (
     <>
-    <body className={`${mainBackground}`}>
-      <div className="app bg-gray-20">
+
+      <div className={`w-full text-white`}>
         <Navbar
           isTopOfPage={isTopOfPage}
           selectedPage={selectedPage}
@@ -45,7 +44,7 @@ function App() {
         <Footer />
 
       </div>
-      </body>
+
     </>
   );
 }

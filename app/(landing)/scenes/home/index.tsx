@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import ActionButton from "../../shared/ActionButton";
 import Image from 'next/image';
+import {homeDesign} from "@/lib/styles";
 
 type Props = {
   setSelectedPage: (value: SelectedPage) => void;
@@ -25,12 +26,12 @@ const Home: React.FC<Props> = ({ setSelectedPage }) => {
   return (
     <section
       id="home"
-      className="gap-16 bg-gray-20 py-10 md:h-full md:pb-0"
-      style={{ backgroundImage: "url('/assets/background1.jpg')" }} // Ruta correcta para la imagen de fondo
+      className={`${homeDesign} gap-16 bg-gray-20 py-10 md:h-full md:pb-0`}
+      style={{ backgroundImage: "url('/assets/background01.jpg')" }} 
     >
       {/* IMAGE AND MAIN HEADER */}
       <motion.div
-        className="mx-auto w-5/6 items-center justify-center md:flex md:h-5/6"
+        className="mx-auto w-5/6 items-center justify-start md:flex md:h-5/6"
         onViewportEnter={() => setSelectedPage(SelectedPage.Home)}
       >
         {/* MAIN HEADER */}
@@ -52,12 +53,12 @@ const Home: React.FC<Props> = ({ setSelectedPage }) => {
                 <Image
                   src="/assets/Logo1.png"
                   alt="logo"
-                  width={180} // Set appropriate width
-                  height={70} // Set appropriate height
+                  width={370} // Set appropriate width
+                  height={200} // Set appropriate height
                 />
               </div>
             </div>
-            <p className="mt-8 text-sm">
+            <p className="mt-8 text-sm w-7/12">
               Unrivaled Gym. Unparalleled Training Fitness Classes. World Class
               Studios to get the Body Shapes That you Dream of.. Get Your Dream
               Body Now.
@@ -87,18 +88,7 @@ const Home: React.FC<Props> = ({ setSelectedPage }) => {
             </AnchorLink>
           </motion.div>
         </div>
-        {/* IMAGE */}
-        <figure
-          className="flex basis-3/5 justify-center md:z-10
-                              md:ml-40 md:mt-16 md:justify-items-end"
-        >
-          <Image
-            src="/assets/Logo1.png"
-            alt="logo"
-            width={180} // Set appropriate width
-            height={70} // Set appropriate height
-          />
-        </figure>
+        
       </motion.div>
     </section>
   );
