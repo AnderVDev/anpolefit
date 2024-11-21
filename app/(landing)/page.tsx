@@ -50,31 +50,3 @@ function App() {
 }
 
 export default App;
-/*
-type Props = {};
-
-function Landing({}: Props) {
-  const [isTopOfPage, setIsTopofPage] = useState<boolean>(true);
-  const [selectedPage, setSelectedPage] = useState<SelectedPage>(
-    SelectedPage.Home
-  );
-  return (
-    <>
-    <body className={`${mainBackground}`}>
-      <Navbar 
-        isTopOfPage={isTopOfPage}
-        selectedPage={selectedPage}
-        setSelectedPage={setSelectedPage}
-        
-      />
-        <Home setSelectedPage={setSelectedPage} />
-        <AboutUs setSelectedPage={setSelectedPage} />
-        <Classes setSelectedPage={setSelectedPage} />
-        <Contact setSelectedPage={setSelectedPage} />
-        <Footer />
-
-     </body>
-    </>
-  );
-}*/
-

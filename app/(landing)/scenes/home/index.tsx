@@ -19,14 +19,14 @@ const Home: React.FC<Props> = ({ setSelectedPage }) => {
   }, []);
 
   if (!hasMounted) {
-    return null; // Evitar renderizado hasta que el componente esté montado
+    return null;
   }
 
 
   return (
     <section
       id="home"
-      className={`${homeDesign} gap-16 bg-gray-20 py-10 md:h-full md:pb-0`}
+      className={`${homeDesign} gap-16 bg-gray-20 py-10 md:h-full md:pb-0 bg-top-right bg-cover bg-no-repeat bg-darkpurple w-full min-h-500`}
       style={{ backgroundImage: "url('/assets/background01.jpg')" }} 
     >
       {/* IMAGE AND MAIN HEADER */}
