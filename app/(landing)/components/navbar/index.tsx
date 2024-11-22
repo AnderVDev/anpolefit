@@ -1,8 +1,7 @@
 import { SelectedPage } from "@/lib/types";
-import { Link } from "lucide-react";
+import Link from "./Link";
 import { useState, useEffect } from "react";
 import ActionButton from "../../shared/ActionButton";
-import Image from 'next/image';
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 type Props = {
