@@ -1,7 +1,23 @@
 import NextAuth from "next-auth";
 import authConfig from "./auth.config";
+import { NextResponse } from "next/server";
 
-export const { auth: middleware } = NextAuth(authConfig);
+const { auth: middleware } = NextAuth(authConfig);
+
+const publicRoutes =[
+  "/",
+  "/login",
+  "/register",
+  "/api/auth/verify-email",
+]
+
+export default middleware((request)=>{
+  const { nextUrl, auth} = request
+  const isLoggedIn = !!auth?.user
+  if(!publicRoutes.includes(nextUrl.pathname)&& !isLoggedIn){
+    return NextResponse.redirect(new URL("/login", nextUrl))
+  }
+})
 
 export const config = {
   matcher: [
