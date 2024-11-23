@@ -5,37 +5,42 @@ import { NextResponse } from "next/server";
 // const { auth: middleware } = NextAuth(authConfig);
 const { auth } = NextAuth(authConfig);
 
-const publicRoutes = ["/",];
+// Routes
+const publicRoutes = ["/"];
 const authRoutes = ["/login", "/register"];
 const apiAuthPrefix = "/api/auth";
+const DEFAULT_LOGIN_REDIRECT = "/dashboard";
 
 export default auth((req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
 
-  console.log({ isLoggedIn, path: nextUrl.pathname });
+  // console.log({ isLoggedIn, path: nextUrl.pathname });
+
+  const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
+  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+  const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
   // Allow all authentication API routes
-  if (nextUrl.pathname.startsWith(apiAuthPrefix)) {
+  if (isApiAuthRoute) {
     return NextResponse.next();
   }
+  // if (isApiAuthRoute) {
+  //   return null;
+  // }
 
   // Allow access to public routes regardless of authentication status
-  if (publicRoutes.includes(nextUrl.pathname)) {
+  if (isPublicRoute) {
     return NextResponse.next();
   }
 
   // Redirect to /dashboard if user is logged in and tries to access authentication routes
-  if (isLoggedIn && authRoutes.includes(nextUrl.pathname)) {
-    return NextResponse.redirect(new URL("/dashboard", nextUrl));
+  if (isLoggedIn && isAuthRoute) {
+    return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
   }
 
   // Redirect to /login if the user is not logged in and tries to access a protected path
-  if (
-    !isLoggedIn &&
-    !authRoutes.includes(nextUrl.pathname) &&
-    !publicRoutes.includes(nextUrl.pathname)
-  ) {
+  if (!isLoggedIn && !isPublicRoute && !isAuthRoute) {
     return NextResponse.redirect(new URL("/login", nextUrl));
   }
 
