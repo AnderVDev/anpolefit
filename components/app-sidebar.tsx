@@ -139,7 +139,11 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { name, email, image } = useCurrentUser();
+  const currentUser = useCurrentUser();
+  if (!currentUser) {
+    return null
+  }
+  const { name, email, image } = currentUser;
   const user = {
     name,
     email,
@@ -160,9 +164,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={user} />
-      </SidebarFooter>
+      <SidebarFooter>{currentUser && <NavUser user={user} />}</SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );
