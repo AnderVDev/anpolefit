@@ -142,7 +142,7 @@ export function LoginForm({ OAuthAccountNotLinked }: LoginFormProps) {
           </form>
 
           {/* Google Login */}
-          <Button variant="outline" className="w-full" onClick={HandleOAuth}>
+          <Button variant="outline" className="w-full" onClick={() => signIn("google")}>
             <Icons.google className="mr-2 h-4 w-4" />
             Login with Google
           </Button>

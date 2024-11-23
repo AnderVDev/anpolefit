@@ -27,6 +27,7 @@ import { registerSchema } from "@/lib/zod";
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { registerAction } from "@/actions/auth-actions";
+import { signIn } from "next-auth/react";
 
 type FormSchema = z.infer<typeof registerSchema>;
 
@@ -176,7 +177,7 @@ export function RegisterForm() {
               </span>
             </div>
           </div>
-          <Button variant="outline" className="w-full">
+          <Button variant="outline" className="w-full" onClick={() => signIn("google")}>
             <Icons.google className="mr-2 h-4 w-4" />
             Google
           </Button>
