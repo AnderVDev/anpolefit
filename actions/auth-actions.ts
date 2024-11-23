@@ -54,7 +54,7 @@ export const registerAction = async (
 
     if (existingUser) {
       const hasOAuthAccount = existingUser.accounts.some(
-        (account) => account.type === "oauth"
+        (account: any) => account.type === "oauth"
       );
 
       return hasOAuthAccount
