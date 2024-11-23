@@ -19,10 +19,24 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     // session() is used to add information to token session of user
     session({ session, token }) {
-      if(session.user){
+      if (session.user) {
         session.user.role = token.role;
       }
       return session;
     },
+  },
+  events: {
+    // The linkAccount event is fired when an account (OAuth provider: GitHub, Google, Facebook, etc.) is linked to an existing user in your database.
+    async linkAccount({ user }) {
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          emailVerified: new Date(),
+        },
+      });
+    },
+  },
+  pages: {
+    signIn: "/login",
   },
 });

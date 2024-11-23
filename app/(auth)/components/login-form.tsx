@@ -27,10 +27,16 @@ import { loginSchema } from "@/lib/zod";
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { loginAction } from "@/actions/auth-actions";
+import { signIn } from "next-auth/react";
 
 type FormSchema = z.infer<typeof loginSchema>;
 
-export function LoginForm() {
+interface LoginFormProps {
+  // isVerified: boolean;
+  OAuthAccountNotLinked: boolean;
+}
+
+export function LoginForm({ OAuthAccountNotLinked }: LoginFormProps) {
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
@@ -44,13 +50,19 @@ export function LoginForm() {
   });
   const { handleSubmit, control } = form;
 
-  const onSubmit: SubmitHandler<FormSchema> = async (data: z.infer<typeof loginSchema>) => {
+  const HandleOAuth = async () => {
+    await signIn("google");
+  };
+
+  const onSubmit: SubmitHandler<FormSchema> = async (
+    data: z.infer<typeof loginSchema>
+  ) => {
     console.log("Form submitted:", data);
     setError(null);
 
     startTransition(async () => {
       const response = await loginAction(data);
-      console.log({response});
+      console.log({ response });
       if (response?.error) {
         setError(response.error);
       } else {
@@ -130,7 +142,7 @@ export function LoginForm() {
           </form>
 
           {/* Google Login */}
-          <Button variant="outline" className="w-full">
+          <Button variant="outline" className="w-full" onClick={HandleOAuth}>
             <Icons.google className="mr-2 h-4 w-4" />
             Login with Google
           </Button>
@@ -145,6 +157,12 @@ export function LoginForm() {
             </p>
           </CardFooter>
           {error && <FormMessage>{error}</FormMessage>}
+          {OAuthAccountNotLinked && (
+            <FormMessage>
+              To confirm your identity, sign in with the same account you used
+              originally.
+            </FormMessage>
+          )}
         </Form>
       </CardContent>
     </Card>
