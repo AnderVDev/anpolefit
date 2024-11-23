@@ -1,7 +1,6 @@
 import React from "react";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
-import LogoutButton from "@/components/logout-button";
 import { AppSidebar } from "@/components/app-sidebar";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -30,14 +29,14 @@ export default async function ProtectedLayout({
           </header>
           {/* <Separator orientation="horizontal" className=" " /> */}
           {/* Main Container */}
-          <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+          <main className="flex flex-1 flex-col gap-4 p-4 pt-0">
             <div className="grid auto-rows-min gap-4 md:grid-cols-3">
 
               <div className="h-full w-full flex flex-col gap-y-10 items-center justify-center">
                   {children}
                 </div>
             </div>
-          </div>
+          </main>
         </SidebarInset>
       </SidebarProvider>
     </SessionProvider>

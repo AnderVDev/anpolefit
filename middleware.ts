@@ -9,7 +9,7 @@ const { auth } = NextAuth(authConfig);
 const publicRoutes = ["/"];
 const authRoutes = ["/login", "/register", "/reset", "/new-password"];
 const apiAuthPrefix = "/api/auth";
-const DEFAULT_LOGIN_REDIRECT = "/dashboard";
+const DEFAULT_LOGIN_REDIRECT = "/overview";
 
 export default auth((req) => {
   const { nextUrl } = req;
