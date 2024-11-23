@@ -141,7 +141,7 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const currentUser = useCurrentUser();
   if (!currentUser) {
-    return null
+    return null;
   }
   const { name, email, image } = currentUser;
   const user = {
