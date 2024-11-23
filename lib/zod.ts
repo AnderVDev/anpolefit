@@ -33,3 +33,15 @@ export const ResetSchema = object({
     required_error: "username is required",
   }).email("Invalid email address"),
 });
+
+export const NewPasswordSchema = object({
+  password: string({ required_error: "Password is required" })
+    .min(8, "Password must be at least 8 characters long")
+    .regex(/[A-Za-z]/, "Password must contain at least one letter")
+    .regex(/[0-9]/, "Password must contain at least one number")
+    .regex(/[@$!%*?&]/, "Password must contain at least one special character"),
+  passwordVerified: string({ required_error: "Please confirm your password" }),
+}).refine((data) => data.password === data.passwordVerified, {
+  path: ["passwordVerified"], // Highlight the confirm password field in case of error
+  message: "Passwords do not match",
+});

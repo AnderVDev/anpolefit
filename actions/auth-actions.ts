@@ -2,13 +2,20 @@
 
 import { signIn } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import { LoginSchema, RegisterSchema, ResetSchema } from "@/lib/zod";
+import {
+  LoginSchema,
+  NewPasswordSchema,
+  RegisterSchema,
+  ResetSchema,
+} from "@/lib/zod";
 import bcrypt from "bcryptjs";
 import { AuthError } from "next-auth";
 import { z } from "zod";
 import { getUserByEmail } from "@/lib/data/user";
 import { Account } from "@/lib/types";
-
+import { sendPasswordRestEmail } from "@/lib/email";
+import { generatePasswordResetToken } from "@/lib/tokens";
+import { getPasswordResetTokenByToken } from "@/lib/data/password-reset-token";
 
 // Utility: Hash password
 const hashPassword = async (password: string) => {
@@ -96,11 +103,57 @@ export const resetAction = async (values: z.infer<typeof ResetSchema>) => {
 
   const { email } = validatedField.data;
   const existingUser = await getUserByEmail(email);
-  if(!existingUser){
-    return { error:"Email not found!"};
+  if (!existingUser) {
+    return { error: "Email not found!" };
   }
 
+  const passwordResetToken = await generatePasswordResetToken(email);
+  await sendPasswordRestEmail(
+    passwordResetToken.email,
+    passwordResetToken.token
+  );
+  return { success: "Reset email sent!" };
+};
 
-  //TODO: GENERATE token & send email
-  return { success:"Reset email sent!"};
+export const newPasswordAction = async (
+  values: z.infer<typeof NewPasswordSchema>,
+  token?: string | null
+) => {
+  if (!token) {
+    return { error: "Missing token!" };
+  }
+  const validatedField = NewPasswordSchema.safeParse(values);
+  if (!validatedField.success) {
+    return { error: "Invalid field!" };
+  }
+  const { password } = validatedField.data;
+
+  const existingToken = await getPasswordResetTokenByToken(token);
+  if (!existingToken) {
+    return { error: "Invalid token!" };
+  }
+  const hasExpired = new Date(existingToken.expires) < new Date();
+  if (hasExpired) {
+    return { error: "Token has expired!" };
+  }
+
+  const existingUser = await getUserByEmail(existingToken.email);
+  if (!existingUser) {
+    return { error: "Email does not exist!" };
+  }
+
+  const hashedPassword = await hashPassword(password);
+  await prisma.user.update({
+    where: {
+      id: existingUser.id,
+    },
+    data: { password: hashedPassword },
+  });
+  await prisma.passwordResetToken.delete({
+    where: {
+      id: existingToken.id,
+    },
+  });
+
+  return { success: "Password updated" }
 };
