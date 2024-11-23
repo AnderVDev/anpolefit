@@ -1,5 +1,5 @@
 import React from 'react'
-import { NewPasswordForm } from '../components/new-password-form'
+import { NewPasswordForm } from '../_components/new-password-form'
 
 function NewPassword() {
   return (

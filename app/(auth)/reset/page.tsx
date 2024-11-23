@@ -1,5 +1,5 @@
 import React from 'react'
-import { ResetForm } from '../components/reset-form'
+import { ResetForm } from '../_components/reset-form'
 
 function Reset() {
   return (

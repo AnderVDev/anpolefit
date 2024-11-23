@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { RegisterForm } from "../components/register-form";
+import { RegisterForm } from "../_components/register-form";
 
 export const metadata: Metadata = {
   title: "Authentication",
