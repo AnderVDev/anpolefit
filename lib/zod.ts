@@ -1,6 +1,6 @@
 import { object, string } from "zod";
 
-export const loginSchema = object({
+export const LoginSchema = object({
   email: string({
     required_error: "username is required",
   }).email("Invalid email address"),
@@ -9,7 +9,7 @@ export const loginSchema = object({
   }),
 });
 
-export const registerSchema = object({
+export const RegisterSchema = object({
   name: string({ required_error: "Name is required" }).min(
     2,
     "Name must be at least 2 characters long"
@@ -26,4 +26,10 @@ export const registerSchema = object({
 }).refine((data) => data.password === data.passwordVerified, {
   path: ["passwordVerified"], // Highlight the confirm password field in case of error
   message: "Passwords do not match",
+});
+
+export const ResetSchema = object({
+  email: string({
+    required_error: "username is required",
+  }).email("Invalid email address"),
 });

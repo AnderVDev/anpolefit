@@ -1,6 +1,6 @@
 import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { loginSchema } from "./lib/zod";
+import { LoginSchema } from "./lib/zod";
 import { prisma } from "./lib/prisma";
 import bcrypt from "bcryptjs";
 import Google from "next-auth/providers/google";
@@ -13,7 +13,7 @@ export default {
     Google,
     Credentials({
       authorize: async (credentials) => {
-        const { data, success } = loginSchema.safeParse(credentials);
+        const { data, success } = LoginSchema.safeParse(credentials);
 
         if (!success) {
           throw new Error("Invalid credentials");

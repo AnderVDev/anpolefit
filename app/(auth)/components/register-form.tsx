@@ -23,13 +23,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { registerSchema } from "@/lib/zod";
+import { RegisterSchema } from "@/lib/zod";
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { registerAction } from "@/actions/auth-actions";
 import { signIn } from "next-auth/react";
 
-type FormSchema = z.infer<typeof registerSchema>;
+type FormSchema = z.infer<typeof RegisterSchema>;
 
 export function RegisterForm() {
   const [error, setError] = useState<string | null>(null);
@@ -37,7 +37,7 @@ export function RegisterForm() {
   const router = useRouter();
 
   const form = useForm<FormSchema>({
-    resolver: zodResolver(registerSchema),
+    resolver: zodResolver(RegisterSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -47,9 +47,10 @@ export function RegisterForm() {
   });
   const { handleSubmit, control } = form;
 
-  const onSubmit: SubmitHandler<FormSchema> = async (data : z.infer<typeof registerSchema>) => {
+  const onSubmit: SubmitHandler<FormSchema> = async (
+    data: z.infer<typeof RegisterSchema>
+  ) => {
     // console.log("Form submitted:", data);
-    
 
     startTransition(async () => {
       const response = await registerAction(data);
@@ -78,7 +79,7 @@ export function RegisterForm() {
             <FormField
               control={control}
               name="name"
-              render={({ field }: any) => (
+              render={({ field }) => (
                 <FormItem className="mb-4">
                   <FormLabel className="">Name</FormLabel>
                   <FormControl>
@@ -99,7 +100,7 @@ export function RegisterForm() {
             <FormField
               control={control}
               name="email"
-              render={({ field }: any) => (
+              render={({ field }) => (
                 <FormItem className="mb-4">
                   <FormLabel className="">Email</FormLabel>
                   <FormControl>
@@ -120,7 +121,7 @@ export function RegisterForm() {
             <FormField
               control={control}
               name="password"
-              render={({ field }: unknown) => (
+              render={({ field }) => (
                 <FormItem className="mb-4">
                   <FormLabel>Password</FormLabel>
                   <FormControl>
@@ -140,7 +141,7 @@ export function RegisterForm() {
             <FormField
               control={control}
               name="passwordVerified"
-              render={({ field }: unknown) => (
+              render={({ field }) => (
                 <FormItem className="mb-4">
                   <FormLabel>Confirm Password</FormLabel>
                   <FormControl>
@@ -177,7 +178,14 @@ export function RegisterForm() {
               </span>
             </div>
           </div>
-          <Button variant="outline" className="w-full" onClick={() => signIn("google")}>
+          <Button
+            variant="outline"
+            className="w-full"
+            onClick={() => signIn("google")}
+          >
+            {isPending && (
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            )}
             <Icons.google className="mr-2 h-4 w-4" />
             Google
           </Button>

@@ -2,10 +2,13 @@
 
 import { signIn } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import { loginSchema, registerSchema } from "@/lib/zod";
+import { LoginSchema, RegisterSchema, ResetSchema } from "@/lib/zod";
 import bcrypt from "bcryptjs";
 import { AuthError } from "next-auth";
 import { z } from "zod";
+import { getUserByEmail } from "@/lib/data/user";
+import { Account } from "@/lib/types";
+
 
 // Utility: Hash password
 const hashPassword = async (password: string) => {
@@ -21,13 +24,13 @@ const checkUserExists = async (email: string) => {
   });
 };
 
-export const loginAction = async (values: z.infer<typeof loginSchema>) => {
+export const loginAction = async (values: z.infer<typeof LoginSchema>) => {
   try {
     const { email, password } = values;
     await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
+      email,
+      password,
+      redirect: false,
     });
     return { success: true };
   } catch (error) {
@@ -40,21 +43,21 @@ export const loginAction = async (values: z.infer<typeof loginSchema>) => {
 };
 
 export const registerAction = async (
-  values: z.infer<typeof registerSchema>
+  values: z.infer<typeof RegisterSchema>
 ) => {
   try {
-    const parsed = registerSchema.safeParse(values);
-    if (!parsed.success) {
+    const validatedField = RegisterSchema.safeParse(values);
+    if (!validatedField.success) {
       return { error: "Invalid input data" };
     }
 
-    const { email, password, name } = parsed.data;
+    const { email, password, name } = validatedField.data;
     // Check if user exists
     const existingUser = await checkUserExists(email);
 
     if (existingUser) {
       const hasOAuthAccount = existingUser.accounts.some(
-        (account: any) => account.type === "oauth"
+        (account: Account) => account.type === "oauth"
       );
 
       return hasOAuthAccount
@@ -83,4 +86,21 @@ export const registerAction = async (
     }
     return { error: "An unexpected error occurred" };
   }
+};
+
+export const resetAction = async (values: z.infer<typeof ResetSchema>) => {
+  const validatedField = ResetSchema.safeParse(values);
+  if (!validatedField.success) {
+    return { error: "Invalid email!" };
+  }
+
+  const { email } = validatedField.data;
+  const existingUser = await getUserByEmail(email);
+  if(!existingUser){
+    return { error:"Email not found!"};
+  }
+
+
+  //TODO: GENERATE token & send email
+  return { success:"Reset email sent!"};
 };

@@ -23,13 +23,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { loginSchema } from "@/lib/zod";
+import { LoginSchema } from "@/lib/zod";
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { loginAction } from "@/actions/auth-actions";
 import { signIn } from "next-auth/react";
 
-type FormSchema = z.infer<typeof loginSchema>;
+type FormSchema = z.infer<typeof LoginSchema>;
 
 interface LoginFormProps {
   // isVerified: boolean;
@@ -42,7 +42,7 @@ export function LoginForm({ OAuthAccountNotLinked }: LoginFormProps) {
   const router = useRouter();
 
   const form = useForm<FormSchema>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(LoginSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -55,14 +55,12 @@ export function LoginForm({ OAuthAccountNotLinked }: LoginFormProps) {
   };
 
   const onSubmit: SubmitHandler<FormSchema> = async (
-    data: z.infer<typeof loginSchema>
+    data: z.infer<typeof LoginSchema>
   ) => {
-    console.log("Form submitted:", data);
     setError(null);
 
     startTransition(async () => {
       const response = await loginAction(data);
-      console.log({ response });
       if (response?.error) {
         setError(response.error);
       } else {
@@ -86,7 +84,7 @@ export function LoginForm({ OAuthAccountNotLinked }: LoginFormProps) {
             <FormField
               control={control}
               name="email"
-              render={({ field }: any) => (
+              render={({ field }) => (
                 <FormItem className="mb-4">
                   <FormLabel className="">Email</FormLabel>
                   <FormControl>
@@ -94,7 +92,7 @@ export function LoginForm({ OAuthAccountNotLinked }: LoginFormProps) {
                       {...field}
                       id="email"
                       type="email"
-                      placeholder="name@example.com"
+                      placeholder="john.doe@example.com"
                       aria-label="Email"
                     />
                   </FormControl>
@@ -107,13 +105,13 @@ export function LoginForm({ OAuthAccountNotLinked }: LoginFormProps) {
             <FormField
               control={control}
               name="password"
-              render={({ field }: any) => (
+              render={({ field }) => (
                 <FormItem className="mb-4">
                   <FormLabel>
                     <div className="flex items-center">
                       Password
                       <Link
-                        href="#"
+                        href="/reset"
                         className="ml-auto text-sm underline"
                         aria-label="Forgot your password?"
                       >
@@ -137,12 +135,18 @@ export function LoginForm({ OAuthAccountNotLinked }: LoginFormProps) {
 
             {/* Submit Button */}
             <Button type="submit" disabled={isPending} className="w-full my-2">
+              {isPending && (
+                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+              )}
               Login
             </Button>
           </form>
 
           {/* Google Login */}
-          <Button variant="outline" className="w-full" onClick={() => signIn("google")}>
+          <Button variant="outline" className="w-full" onClick={HandleOAuth}>
+            {isPending && (
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            )}
             <Icons.google className="mr-2 h-4 w-4" />
             Login with Google
           </Button>

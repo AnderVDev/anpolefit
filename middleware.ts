@@ -7,7 +7,7 @@ const { auth } = NextAuth(authConfig);
 
 // Routes
 const publicRoutes = ["/"];
-const authRoutes = ["/login", "/register"];
+const authRoutes = ["/login", "/register", "/reset"];
 const apiAuthPrefix = "/api/auth";
 const DEFAULT_LOGIN_REDIRECT = "/dashboard";
 
