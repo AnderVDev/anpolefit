@@ -6,7 +6,10 @@ export default async function Dashboard() {
 
   return (
     <div className="container">
+      {/* <h1>{process.env.testKey}</h1> */}
       <pre>{JSON.stringify(session, null, 2)}</pre>
+
+
     </div>
   );
 }

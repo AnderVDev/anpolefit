@@ -1,14 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {
-  Calendar,
-  Home,
-  Inbox,
-  Search,
-  Settings,
-
-} from "lucide-react";
+import { Calculator, Home, Inbox, Search, Settings } from "lucide-react";
 
 import { NavBasic } from "@/components/nav-basic";
 import { NavUser } from "@/components/nav-user";
@@ -35,9 +28,9 @@ const data = [
     icon: Inbox,
   },
   {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
+    title: "Calculator",
+    url: "/calculator",
+    icon: Calculator,
   },
   {
     title: "Search",
@@ -49,7 +42,7 @@ const data = [
     url: "#",
     icon: Settings,
   },
-]
+];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const currentUser = useCurrentUser();
@@ -68,8 +61,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       {/* Header section */}
       <SidebarHeader>
         <Image
-          src="/assets/Logo Anpolefit_16.png" 
-          alt="Logo" 
+          src="/assets/Logo Anpolefit_16.png"
+          alt="Logo"
+          className="h-full w-full object-cover"
           width={200} // Desired width
           height={100} // Proportional height to maintain the aspect ratio
           priority
@@ -78,8 +72,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       {/* Main section */}
       <SidebarContent>
         <NavBasic items={data} />
-        {/* <NavMain items={data.navMain} /> */}
-        {/* <NavProjects projects={data.projects} /> */}
       </SidebarContent>
 
       {/* Footer section */}
