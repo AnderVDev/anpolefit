@@ -29,13 +29,11 @@ export default async function ProtectedLayout({
           </header>
           {/* <Separator orientation="horizontal" className=" " /> */}
           {/* Main Container */}
-          <main className="flex flex-1 flex-col gap-4 p-4 pt-0">
-            <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-
-              <div className="h-full w-full flex flex-col gap-y-10 items-center justify-center">
-                  {children}
-                </div>
-            </div>
+          <main className="flex flex-1 flex-col gap-2 p-2 pt-0">
+            {children}
+            {/* <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+              <div className="h-full w-full flex flex-col gap-y-10 items-center justify-center"></div>
+            </div> */}
           </main>
         </SidebarInset>
       </SidebarProvider>
