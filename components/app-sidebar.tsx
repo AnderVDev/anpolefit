@@ -68,10 +68,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       {/* Header section */}
       <SidebarHeader>
         <Image
-          src="/assets/Logo Anpolefit_16.png"
-          alt={"Logo"}
-          width={128}
-          height={32}
+          src="/assets/Logo Anpolefit_16.png" 
+          alt="Logo" 
+          width={200} // Desired width
+          height={100} // Proportional height to maintain the aspect ratio
+          priority
         />
       </SidebarHeader>
       {/* Main section */}
