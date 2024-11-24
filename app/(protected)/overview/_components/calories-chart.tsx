@@ -2,9 +2,8 @@ import { Card } from "@/components/ui/card";
 import React from "react";
 import { RadialChart } from "./radial-chart";
 
-
 const sampleData = [
-  { browser: "Safari", visitors: 200, fill: "var(--color-safari)" },
+  { browser: "Safari", visitors: 350, fill: "var(--color-safari)" },
 ];
 
 const sampleConfig = {
@@ -23,7 +22,7 @@ function CaloriesChart() {
       subtitle="Visitors"
       className="max-w-md mx-auto"
     />
-
+      {/* <RadialChart /> */}
     </Card>
   );
 }
