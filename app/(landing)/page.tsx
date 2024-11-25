@@ -1,26 +1,52 @@
-"use client"
-import React, { useState } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Home from "./scenes/home";
-import Navbar from "./components/navbar";
+import AboutUs from "./scenes/aboutus";
+import Classes from "./scenes/classes";
+import NewsLetter from "./scenes/newsLetter";
+import Footer from "./_components/footer";
+
+import Navbar from "./_components/navbar";
 import { SelectedPage } from "@/lib/types";
 
-type Props = {};
 
-function Landing({}: Props) {
-  const [isTopOfPage, setIsTopofPage] = useState<boolean>(true);
+function App() {
   const [selectedPage, setSelectedPage] = useState<SelectedPage>(
-    SelectedPage.Home
+    SelectedPage.Home,
   );
+  const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY === 0) {
+        setIsTopOfPage(true);
+        setSelectedPage(SelectedPage.Home);
+      }
+      if (window.scrollY !== 0) setIsTopOfPage(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  });
+
   return (
     <>
-      <Navbar
-        isTopOfPage={isTopOfPage}
-        selectedPage={selectedPage}
-        setSelectedPage={setSelectedPage}
-      />
-      {/* <Home /> */}
+
+      <div className={`w-full text-white`}>
+        <Navbar
+          isTopOfPage={isTopOfPage}
+          selectedPage={selectedPage}
+          setSelectedPage={setSelectedPage}
+        />
+        <Home setSelectedPage={setSelectedPage} />
+        <AboutUs setSelectedPage={setSelectedPage} />
+        <Classes setSelectedPage={setSelectedPage} />
+        <NewsLetter setSelectedPage={setSelectedPage} />
+        <Footer />
+
+      </div>
+
     </>
   );
 }
 
-export default Landing;
+export default App;
