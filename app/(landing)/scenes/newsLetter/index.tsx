@@ -6,7 +6,8 @@ import React from "react";
 function index() {
   return (
     <>
-      <div>Contact us</div>
+      <div>News Letter</div>
+      <p>Sólo correo electrónico</p>
     </>
   );
 }

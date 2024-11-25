@@ -7,7 +7,7 @@ function index() {
   return (
     <>
       <div>Footer</div>
-      <h1>CAROLINA</h1>
+      <h1>Árbol de navegación</h1>
     </>
   );
 }
