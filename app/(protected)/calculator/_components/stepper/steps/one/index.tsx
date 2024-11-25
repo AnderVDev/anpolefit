@@ -3,9 +3,7 @@ import React from "react";
 import GenderCard from "./GenderCard";
 import { Activities, Gender } from "@/types/calculator";
 import Metrics from "./Metrics";
-// import ActivityCard from "@/components/ActivityCard";
 import { Search, UserRound } from "lucide-react";
-
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,7 +19,7 @@ import {
 } from "@/components/ui/form";
 import { StepOneSchema } from "@/lib/zod";
 import ActivityCard from "./ActivityCard";
-
+import { useStepperCountStore } from "@/lib/stores/calculator-store";
 
 type FormSchema = z.infer<typeof StepOneSchema>;
 
@@ -30,43 +28,40 @@ const genders = [
   { id: Gender.FEMALE, gender: Gender.FEMALE, icon: UserRound },
 ];
 
-
 const activities = [
   {
-    id: "SEDENTARY",
+    id: Activities.SEDENTARY,
     title: "Sedentary",
     description: "Minimal physical activity.",
-    image: "image",
   },
   {
-    id: "LIGHT",
+    id: Activities.LIGHT,
     title: "Light Activity",
     description: "Walking short distances.",
-    image: "image",
   },
   {
-    id: "MODERATE",
+    id: Activities.MODERATE,
     title: "Moderate Activity",
     description: "Brisk walking, recreational swimming, gardening.",
-    image: "image",
   },
   {
-    id: "VERY",
+    id: Activities.VERY,
     title: "Very Active",
     description: "Running, cycling at a fast pace, playing competitive sports.",
-    image: "image",
   },
 ];
 
 function StepOne() {
+  const increment = useStepperCountStore((state) => state.increase);
+  const currentStep = useStepperCountStore((state) => state.step);
   const form = useForm<FormSchema>({
     resolver: zodResolver(StepOneSchema),
     defaultValues: {
       gender: undefined,
       age: 0,
       metrics: {
-        weight: undefined,
-        height: undefined,
+        weight: 0,
+        height: 0,
       },
       activity: undefined,
     },
@@ -85,24 +80,27 @@ function StepOne() {
   };
 
   const onSubmit: SubmitHandler<FormSchema> = async (
-    data: z.infer<typeof StepOneSchema>
-  ) =>
-    // values: FormSchema,
-    // e: React.FormEvent<HTMLFormElement>
-    {
-      // const { age, metrics, gender, activity } = watchAllFields;
-      // e.preventDefault();
-      // onDataChange({
-      //   age: age,
-      //   weight: metrics.weight,
-      //   height: metrics.height,
-      //   gender: gender,
-      //   activity: activity,
-      // });
-      // onStepSubmitSuccess(true);
-      // onStepSuccess(2);
-      // console.log("Form values", values);
-    };
+    values: z.infer<typeof StepOneSchema>
+  ) => {
+    // const { age, metrics, gender, activity } = watchAllFields;
+    // e.preventDefault();
+    // onDataChange({
+    //   age: age,
+    //   weight: metrics.weight,
+    //   height: metrics.height,
+    //   gender: gender,
+    //   activity: activity,
+    // });
+    // onStepSubmitSuccess(true);
+    // onStepSuccess(2);
+    const result = StepOneSchema.safeParse(values);
+    if (!result.success) {
+      console.log(result.error.format()); // Debug errors
+    }
+    increment();
+    console.log("Form values", values);
+    console.log("Current Step value", currentStep);
+  };
   return (
     <Form {...form}>
       <form
@@ -162,6 +160,7 @@ function StepOne() {
                             onChange={(e) =>
                               field.onChange(Number(e.target.value))
                             }
+                            min={0}
                           />
                         </FormControl>
                       </div>
@@ -177,7 +176,7 @@ function StepOne() {
               <FormField
                 control={control}
                 name="metrics"
-                render={({ field }) => (
+                render={({ field, formState, fieldState }) => (
                   <FormItem>
                     {/* <FormLabel>Age</FormLabel> */}
                     <FormControl>
@@ -189,8 +188,21 @@ function StepOne() {
                           setValue("metrics.weight", Number(value))
                         }
                       />
+                      {/* <button
+                        onClick={() => {
+                          console.log(
+                            formState.errors.metrics?.height?.message
+                          );
+                        }}
+                      >
+                        test
+                      </button> */}
                     </FormControl>
-                    <FormMessage />
+                    {formState.errors.metrics?.height?.message && (
+                      <FormMessage>
+                        {formState.errors.metrics?.height?.message}
+                      </FormMessage>
+                    )}
                   </FormItem>
                 )}
               />
@@ -215,7 +227,6 @@ function StepOne() {
                             key={activity.id}
                             title={activity.title}
                             description={activity.description}
-                            image={activity.image}
                             selected={activity.id === field.value}
                             onSelect={() => {
                               field.onChange(activity.id);

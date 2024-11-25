@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Check } from "lucide-react";
 import { useStepperCountStore } from "@/lib/stores/calculator-store";
 import StepContent from "./StepContent";
+import { motion } from "framer-motion";
 // import StepContent from "./StepContent";
 // import { Button } from "../ui/button";
 
@@ -12,31 +13,36 @@ const Stepper = () => {
 
   const [complete, setComplete] = useState(false);
 
-//   const handleStepCompleted = (isCompleted: boolean) => {
-//     if (isCompleted) {
-//       setComplete(true);
-//     }
-//   };
+  //   const handleStepCompleted = (isCompleted: boolean) => {
+  //     if (isCompleted) {
+  //       setComplete(true);
+  //     }
+  //   };
 
-//   const handleCurrentStep = (nextStep: number) => {
-//     if (nextStep > 0 && nextStep <= steps.length) {
-//       setCurrentStep(nextStep);
-//       if (nextStep === steps.length) {
-//         setComplete(true);
-//       } else {
-//         setComplete(false);
-//       }
-//     }
-//   };
+  //   const handleCurrentStep = (nextStep: number) => {
+  //     if (nextStep > 0 && nextStep <= steps.length) {
+  //       setCurrentStep(nextStep);
+  //       if (nextStep === steps.length) {
+  //         setComplete(true);
+  //       } else {
+  //         setComplete(false);
+  //       }
+  //     }
+  //   };
 
-//   const handleBackStep = () => {
-//     setCurrentStep((prev) => Math.max(prev - 1, 1));
-//     setComplete(false);
-//   };
+  //   const handleBackStep = () => {
+  //     setCurrentStep((prev) => Math.max(prev - 1, 1));
+  //     setComplete(false);
+  //   };
 
   return (
     <div className="flex flex-col items-center">
-      <div className="flex justify-between mb-4">
+      <motion.div
+        className="flex justify-between mb-4"
+        initial={{ x: "50%", opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+      >
         {steps.map((step, i) => (
           <div
             key={i}
@@ -67,8 +73,8 @@ const Stepper = () => {
             <p>{step}</p>
           </div>
         ))}
-      </div>
-      <StepContent/>
+      </motion.div>
+      <StepContent />
     </div>
   );
 };

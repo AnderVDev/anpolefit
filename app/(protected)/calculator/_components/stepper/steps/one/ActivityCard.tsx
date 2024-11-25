@@ -6,7 +6,6 @@ const unselectedStyle = "";
 interface ActivityCardProps {
   title: string;
   description: string;
-  image: string;
   selected: boolean;
   onSelect: () => void;
 }
@@ -14,7 +13,6 @@ interface ActivityCardProps {
 function ActivityCard({
   title,
   description,
-  image,
   selected,
   onSelect,
 }: ActivityCardProps) {

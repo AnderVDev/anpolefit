@@ -11,6 +11,7 @@ interface GenderCardProps {
   onSelect: () => void;
 }
 function GenderCard({ gender, icon, selected, onSelect }: GenderCardProps) {
+    
   return (
     <div
       className={`flex p-2 gap-2 w-24 h-8 items-center border border-gray-100 rounded-lg shadow-current cursor-pointer ${

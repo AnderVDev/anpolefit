@@ -6,11 +6,11 @@ const boxStyle =
   "flex w-42 h-20 border border-gray-100 rounded-lg p-2 gap-2 items-center";
 
 interface MetricsProps {
-  onWeightChange: (value: number) => void;
-  onHeightChange: (value: number) => void;
+  onWeightChange: (value: number ) => void;
+  onHeightChange: (value: number ) => void;
 }
 function Metrics({ onWeightChange, onHeightChange }: MetricsProps) {
-  const [unitSystem, setUnitSystem] = useState("metric");
+  const [unitSystem, setUnitSystem] = useState<"metric" | "imperial">("metric");
 
   const handleHeightChangeMetric = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
@@ -37,7 +37,9 @@ function Metrics({ onWeightChange, onHeightChange }: MetricsProps) {
     }
   };
 
-  const handleWeightChangeImperial = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleWeightChangeImperial = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = parseFloat(e.target.value);
     if (!isNaN(value)) {
       const weightInKg = value * 0.453592;
@@ -46,47 +48,15 @@ function Metrics({ onWeightChange, onHeightChange }: MetricsProps) {
   };
 
   return (
-    <Tabs defaultValue="metric" className="flex flex-col items-center w-full ">
+    <Tabs
+      defaultValue="metric"
+      onValueChange={(value) => setUnitSystem(value as "metric" | "imperial")}
+      className="flex flex-col items-center w-full "
+    >
       <TabsList>
         <TabsTrigger value="imperial">Imperial</TabsTrigger>
         <TabsTrigger value="metric">Metric</TabsTrigger>
       </TabsList>
-
-      {/* imperial content */}
-      <TabsContent value="imperial">
-        <div className="flex flex-col md:flex-row gap-2 items-center justify-between">
-          <div className={`${boxStyle}`}>
-            <h2 className="font-bold">Height</h2>
-            <div className="flex flex-col gap-2">
-              <Input
-                className="w-16 h-6"
-                type="text"
-                placeholder="ft"
-                onChange={(e) => handleHeightChangeImperial(e, "ft")}
-                // onChange={(e) => onHeightChange(parseFloat(e.target.value))}
-              />
-              <Input
-                className="w-16 h-6"
-                type="text"
-                placeholder="inch"
-                onChange={(e) => handleHeightChangeImperial(e, "in")}
-                // onChange={(e) => onHeightChange(parseFloat(e.target.value))}
-              />
-            </div>
-          </div>
-
-          <div className={`${boxStyle}`}>
-            <h2 className="font-bold ">Weight</h2>
-            <Input
-              className="w-16 h-6"
-              type="text"
-              placeholder="lbs"
-              onChange={handleWeightChangeImperial}
-              // onChange={(e) => onWeightChange(parseFloat(e.target.value))}
-            />
-          </div>
-        </div>
-      </TabsContent>
 
       {/* metrics content */}
       <TabsContent value="metric">
@@ -95,10 +65,10 @@ function Metrics({ onWeightChange, onHeightChange }: MetricsProps) {
             <h2 className="font-bold">Height</h2>
             <Input
               className="w-16 h-6"
-              type="text"
+              type="number"
               placeholder="cm"
+              aria-label="Height in centimeters"
               onChange={handleHeightChangeMetric}
-              // onChange={(e) => onHeightChange(parseFloat(e.target.value))}
             />
           </div>
 
@@ -106,14 +76,53 @@ function Metrics({ onWeightChange, onHeightChange }: MetricsProps) {
             <h2 className="font-bold">Weight</h2>
             <Input
               className="w-16 h-6"
-              type="text"
+              type="number"
               placeholder="kg"
+              aria-label="Weight in kilograms"
               onChange={handleWeightChangeMetric}
               // onChange={(e) => onWeightChange(parseFloat(e.target.value))}
             />
           </div>
         </div>
       </TabsContent>
+
+      {/* imperial content */}
+      <TabsContent value="imperial">
+        <div className="flex flex-col md:flex-row gap-2 items-center ">
+          <div className={`${boxStyle}`}>
+            <h2 className="font-bold">Height</h2>
+            <div className="flex flex-col gap-2">
+              <Input
+                className="w-16 h-6"
+                type="number"
+                placeholder="ft"
+                aria-label="Height in feet"
+                onChange={(e) => handleHeightChangeImperial(e, "ft")}
+   
+              />
+              <Input
+                className="w-16 h-6"
+                type="number"
+                placeholder="inch"
+                onChange={(e) => handleHeightChangeImperial(e, "in")}
+   
+              />
+            </div>
+          </div>
+
+          <div className={`${boxStyle}`}>
+            <h2 className="font-bold ">Weight</h2>
+            <Input
+              className="w-16 h-6"
+              type="number"
+              placeholder="lbs"
+              onChange={handleWeightChangeImperial}
+            />
+          </div>
+        </div>
+      </TabsContent>
+
+      
     </Tabs>
   );
 }
