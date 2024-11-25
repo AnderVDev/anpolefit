@@ -4,9 +4,9 @@ import Home from "./scenes/home";
 import AboutUs from "./scenes/aboutus";
 import Classes from "./scenes/classes";
 import NewsLetter from "./scenes/newsLetter";
-import Footer from "./components/footer";
+import Footer from "./_components/footer";
 
-import Navbar from "./components/navbar";
+import Navbar from "./_components/navbar";
 import { SelectedPage } from "@/lib/types";
 
 
