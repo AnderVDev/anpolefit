@@ -20,8 +20,20 @@ interface StepOneStore {
   resetFormData: () => void;
 }
 
+interface StepTwoStore {
+  expectations: string;
+  setExpectations: (newExpectation: string) => void;
+  clearExpectations: () => void;
+}
+
+interface StepThreeStore {
+  BodyType: string;
+  setExpectations: (newExpectation: string) => void;
+  clearExpectations: () => void;
+}
+
 export const useStepperCountStore = create<StepState>()((set) => ({
-  step: 1,
+  step: 2,
   increase: () => set((state) => ({ step: state.step + 1 })),
   decrease: () => set((state) => ({ step: state.step - 1 })),
 }));
@@ -48,4 +60,10 @@ export const useStepOneStore = create<StepOneStore>((set) => ({
         activity: "",
       },
     })),
+}));
+
+export const useStepTwoStore = create<StepTwoStore>((set) => ({
+  expectations: "", 
+  setExpectations: (newExpectation) => set({ expectations: newExpectation }), 
+  clearExpectations: () => set({ expectations: "" }), 
 }));
