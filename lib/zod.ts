@@ -1,4 +1,4 @@
-import { Activities, Gender } from "@/types/calculator";
+import { Activities, BodyTypes, Expectations, Gender } from "@/types/calculator";
 import { object, string, number, nativeEnum, coerce } from "zod";
 //------------------> Authentication Schemas <-------------------//
 export const LoginSchema = object({
@@ -69,5 +69,17 @@ export const StepOneSchema = object({
   }),
   activity: nativeEnum(Activities, {
     message: "Must select an Activity",
+  }),
+});
+
+export const StepTwoSchema = object({
+  expectation: nativeEnum(Expectations, {
+    message: "Must select an Expectation Body",
+  }),
+});
+
+export const StepThreeSchema = object({
+  bodyType: nativeEnum(BodyTypes, {
+    message: "Must select a Body Type",
   }),
 });

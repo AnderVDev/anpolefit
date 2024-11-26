@@ -7,7 +7,6 @@ import React, { useState } from "react";
 import OptionsCard from "../../OptionsCards";
 import buildImage from "@/public/assets/Logo Anpolefit_13.png";
 import recompositionImage from "@/public/assets/Logo Anpolefit_13.png";
-// import recompositionImage from "@/app/assets/recomposition_anpole.png";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -19,26 +18,21 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import { Expectations } from "@/types/calculator";
+import { StepTwoSchema } from "@/lib/zod";
 
-const formSchema = z.object({
-  expectation: z.enum(["BUILD", "RECOMPOSITION"], {
-    message: "Must select an Expectation Body",
-  }),
-});
+type FormSchema = z.infer<typeof StepTwoSchema>;
 
-type FormSchema = z.infer<typeof formSchema>;
-
-type Expectations = "BUILD" | "RECOMPOSITION";
 const expectations = [
   {
-    id: "BUILD",
+    id: Expectations.BUILD,
     name: "Build Muscle",
     description:
       "Focuses on increasing muscle mass through resistance training and adequate nutrition. Examples: Lifting weights, strength training exercises targeting specific muscle groups.",
     image: buildImage,
   },
   {
-    id: "RECOMPOSITION",
+    id: Expectations.RECOMPOSITION,
     name: "Body Recomposition",
     description:
       "Aims to simultaneously reduce body fat and increase muscle mass to change body composition. Examples: Combining strength training with cardiovascular exercises and a balanced diet to achieve a leaner physique.",
@@ -48,14 +42,16 @@ const expectations = [
 
 function StepTwo() {
   const currentStep = useStepperCountStore((state) => state.step);
+  const increment = useStepperCountStore((state) => state.increase);
+  const decrement = useStepperCountStore((state)=> state.decrease)
   const stepTwoData = useStepTwoStore((state) => state.expectations);
   const setStepTwoData = useStepTwoStore((state) => state.setExpectations);
   const [selectedExpectation, setSelectedExpectation] =
     useState<Expectations | null>(null);
   const form = useForm<FormSchema>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(StepTwoSchema),
     defaultValues: {
-      expectation: "",
+      expectation: undefined,
     },
   });
   const { watch, handleSubmit, control, setValue } = form;
@@ -67,11 +63,17 @@ function StepTwo() {
     setValue("expectation", expectationId);
   };
 
-  const onSubmit: SubmitHandler<FormSchema> = () => {
+  const onSubmit: SubmitHandler<FormSchema> = (
+    values: z.infer<typeof StepTwoSchema>
+  ) => {
     const { expectation } = watchAllFields;
-    setStepTwoData(expectation)
-  };
+    setStepTwoData(expectation);
 
+    console.log("Form values", values);
+    console.log("Current Step value", currentStep);
+    console.log("Step One Store", stepTwoData);
+    increment();
+  };
 
   return (
     <Form {...form}>
@@ -112,13 +114,13 @@ function StepTwo() {
           )}
         />
         <section className="flex gap-2">
-          {/* <Button
+          <Button
             className="bg-purple-400 hover:bg-gray-500 rounded-lg m-0 "
             type="button"
-            onClick={onStepBack}
+            onClick={decrement}
           >
             Back
-          </Button> */}
+          </Button>
           <Button className="bg-gray-500 rounded-lg m-0 " type="submit">
             Next
           </Button>

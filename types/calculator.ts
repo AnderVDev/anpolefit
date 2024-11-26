@@ -12,7 +12,7 @@ export enum Expectations {
   BUILD = "build",
   RECOMPOSITION = "recomposition",
 }
-export enum BodyType {
+export enum BodyTypes {
   ECTOMORPH = "ectomorph",
   MESOMORPH = "mesomorph",
   ENDOMORPH = "endomorph",

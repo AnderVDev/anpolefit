@@ -15,31 +15,31 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import { StepThreeSchema } from "@/lib/zod";
+import { BodyTypes } from "@/types/calculator";
+import {
+  useStepperCountStore,
+  useStepThreeStore,
+} from "@/lib/stores/calculator-store";
 
-const formSchema = z.object({
-  bodyType: z.enum(["ECTOMORPH", "MESOMORPH", "ENDOMORPH"], {
-    message: "Must select a Body Type",
-  }),
-});
-type FormSchema = z.infer<typeof formSchema>;
-type BodiesTypes = "ECTOMORPH" | "MESOMORPH" | "ENDOMORPH";
-const bodiesTypes = [
+type FormSchema = z.infer<typeof StepThreeSchema>;
+const bodyTypes = [
   {
-    id: "ECTOMORPH",
+    id: BodyTypes.ECTOMORPH,
     name: "Ectomorph",
     description:
       "Characterized by a slim, lean build with a fast metabolism. Ectomorphs often find it difficult to gain weight and muscle. Examples: Narrow shoulders and hips, low body fat, and long limbs",
     image: ectomorphBody,
   },
   {
-    id: "MESOMORPH",
+    id: BodyTypes.MESOMORPH,
     name: "Mesomorph",
     description:
       "Typically has a muscular, well-defined build with a natural ability to gain muscle and strength easily. Examples: Broad shoulders, narrow waist, and a generally athletic appearance.",
     image: mesomorphBody,
   },
   {
-    id: "ENDOMORPH",
+    id: BodyTypes.ENDOMORPH,
     name: "Endomorph",
     description:
       "Tends to have a higher body fat percentage with a rounder physique. Endomorphs may find it easier to gain weight but struggle to lose fat. Examples: Wider waist, larger bone structure, and more fat accumulation in the lower body.",
@@ -47,13 +47,17 @@ const bodiesTypes = [
   },
 ];
 
-
 function StepThree() {
-  const [selectedBodyType, setSelectedBodyType] = useState<BodiesTypes | null>(
+  const currentStep = useStepperCountStore((state) => state.step);
+  const increment = useStepperCountStore((state) => state.increase);
+  const decrement = useStepperCountStore((state) => state.decrease);
+  const stepThreeData = useStepThreeStore((state) => state.bodyType);
+  const setStepThreeData = useStepThreeStore((state) => state.setBodyType);
+  const [selectedBodyType, setSelectedBodyType] = useState<BodyTypes | null>(
     null
   );
   const form = useForm<FormSchema>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(StepThreeSchema),
     defaultValues: {
       bodyType: undefined,
     },
@@ -62,25 +66,28 @@ function StepThree() {
 
   const watchAllFields = watch();
 
-  const handleSelectBodyType = (bodyTypeId: BodiesTypes) => {
+  const handleSelectBodyType = (bodyTypeId: BodyTypes) => {
     setSelectedBodyType(bodyTypeId);
     setValue("bodyType", bodyTypeId);
   };
 
-  const onSubmit: SubmitHandler<FormSchema> = () => {
+  const onSubmit: SubmitHandler<FormSchema> = (
+    values: z.infer<typeof StepThreeSchema>
+  ) => {
     const { bodyType } = watchAllFields;
-   
-  };
 
-  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    handleSubmit(onSubmit)();
+    setStepThreeData(bodyType);
+
+    console.log("Form values", values);
+    console.log("Current Step value", currentStep);
+    console.log("Step One Store", stepThreeData);
+    increment();
   };
 
   return (
     <Form {...form}>
       <form
-        onSubmit={handleFormSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="flex items-center justify-center flex-col flex-grow p-4 gap-2"
       >
         <FormField
@@ -92,7 +99,7 @@ function StepThree() {
               <FormControl>
                 <Card className="cursor-pointer gap-0 border border-gray-200 rounded-lg">
                   <div className=" grid grid-col-1 justify-items-center md:grid-cols-3 overflow-hidden">
-                    {bodiesTypes.map((type) => (
+                    {bodyTypes.map((type) => (
                       <OptionsCard
                         key={type.id}
                         name={type.name}
@@ -101,7 +108,7 @@ function StepThree() {
                         selected={type.id === selectedBodyType}
                         onSelect={() => {
                           field.onChange(type.id);
-                          handleSelectBodyType(type.id as BodiesTypes);
+                          handleSelectBodyType(type.id as BodyTypes);
                         }}
                       />
                     ))}
@@ -113,13 +120,13 @@ function StepThree() {
           )}
         />
         <section className="flex gap-2">
-          {/* <Button
+          <Button
             className="bg-purple-400 hover:bg-gray-500 rounded-lg m-0 "
             type="button"
-            onClick={onStepBack}
+            onClick={decrement}
           >
             Back
-          </Button> */}
+          </Button>
           <Button className="bg-gray-500 rounded-lg m-0 " type="submit">
             Next
           </Button>
