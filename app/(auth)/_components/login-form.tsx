@@ -30,6 +30,7 @@ import { loginAction } from "@/actions/auth-actions";
 import { signIn } from "next-auth/react";
 
 type FormSchema = z.infer<typeof LoginSchema>;
+const button_menu = "bg-hotpink rounded-full text-lg text-white px-6";
 
 interface LoginFormProps {
   // isVerified: boolean;
@@ -70,9 +71,9 @@ export function LoginForm({ OAuthAccountNotLinked }: LoginFormProps) {
   };
 
   return (
-    <Card className="mx-auto max-w-sm">
+    <Card className="mx-auto max-w-sm bg-darkpurple bg-opacity-70 shadow-xl border-solid border-midpurple border text-lightpurple">
       <CardHeader>
-        <CardTitle className="text-2xl">Login</CardTitle>
+        <CardTitle className="text-3xl">Login</CardTitle>
         <CardDescription>
           Enter your email below to login to your account
         </CardDescription>
@@ -134,7 +135,7 @@ export function LoginForm({ OAuthAccountNotLinked }: LoginFormProps) {
             />
 
             {/* Submit Button */}
-            <Button type="submit" disabled={isPending} className="w-full my-2">
+            <Button type="submit" disabled={isPending} className={`${button_menu} w-full my-2`}>
               {isPending && (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               )}
@@ -143,7 +144,7 @@ export function LoginForm({ OAuthAccountNotLinked }: LoginFormProps) {
           </form>
 
           {/* Google Login */}
-          <Button variant="outline" className="w-full" onClick={HandleOAuth}>
+          <Button variant="outline"  className={`${button_menu} w-full my-2 bg-black border-none`} onClick={HandleOAuth}>
             {isPending && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}

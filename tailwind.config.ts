@@ -11,11 +11,13 @@ const config: Config = {
     extend: {
       colors: { 
         hotpink: '#cf51bc',
+        midpink: '#a44f95',
         darkpurple: '#1e0748',
         purple : '#915092',
         lightpurple : '#ceacc8',
         turquoise : '#adcfcd',
         lightturquoise : '#d8edeb',
+        midpurple : '#d883c9',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
