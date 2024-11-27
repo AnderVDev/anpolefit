@@ -3,8 +3,8 @@ import Image, { StaticImageData } from "next/image";
 
 type Props = {
   name: string;
-  description?: string; // Hacemos que la descripción sea opcional
-  image: string | StaticImageData; // Maneja rutas y objetos de imagen
+  description?: string;
+  image: string | StaticImageData; 
 };
 
 const Classes = ({

@@ -50,7 +50,7 @@ type Props = {
 
 const OurClasses = ({ setSelectedPage }: Props) => {
   return (
-    <section id="classes" className="w-full bg-primary-100 py-40">
+    <section id="classes" className="w-full bg-hotpink py-24">
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.Classes)}
       >
@@ -66,12 +66,9 @@ const OurClasses = ({ setSelectedPage }: Props) => {
           }}
         >
           <div className="md:w-3/5">
-            <HText>OUR CLASSES</HText>
-            <p className="py-5">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
-              eaque, incidunt error esse, tempora natus eius quod doloribus
-              aperiam, eum ad pariatur. Consectetur deserunt recusandae
-              voluptatem blanditiis dignissimos. Eum, cupiditate.
+            <HText>OUR <span className="text-darkpurple">CLASSES</span></HText>
+            <p className="py-5  text-xl">
+            Our workouts will not only make you sweat, but they will also empower you. From strength sessions to high-impact cardio, each class is designed to help you unleash your full potential and achieve your goals with confidence.
             </p>
           </div>
         </motion.div>

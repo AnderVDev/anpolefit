@@ -14,17 +14,16 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
   const flexBetween = "flex items-center justify-between";
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
   const isAboveMediumScreens = useMediaQuery("(min-width:1060px)");
-  const navbarBackground = isTopOfPage ? "" : "bg-hotpink drop-shadow bg-opacity-80";
+  const navbarBackground = isTopOfPage ? "" : "bg-lightpurple drop-shadow bg-opacity-90 py-6";
+  const button_menu = "bg-hotpink rounded-full text-lg text-white px-6";
 
   return (
     <nav className="w-10/12">
       <div className={`${navbarBackground} ${flexBetween} fixed top-0 z-30 w-full py-8`}>
         <div className={`${flexBetween}  mx-auto w-5/6`}>
           <div className={`${flexBetween} w-full gap-16`}>
+            
             {/* LEFT SIDE NAVBAR */}
-         
-
-            {/* RIGHT SIDE NAVBAR */}
             {isAboveMediumScreens ? (
               <div className={`${flexBetween} w-full`}>
                 <div className={`${flexBetween} gap-8 text-xl`}>
@@ -44,19 +43,23 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
                     setSelectedPage={setSelectedPage}
                   />
                 </div>
-                <div className={`${flexBetween} gap-8`}>
-                  <a href="../../../login">Sign In</a>
-                  <ActionButton setSelectedPage={setSelectedPage}>
-                    Become a Member
-                  </ActionButton>
+
+                {/* RIGHT SIDE NAVBAR */}
+                <div className={`${flexBetween} gap-8 text-xl`}>
+                <div className={`${button_menu} gap-8`}>
+                  <a href="/login">Become a Member</a>
+                </div> 
+                <div className={`${button_menu} gap-8`}>
+                  <a href="/login">Sign In</a>
+                </div>
                 </div>
               </div>
             ) : (
               <button
-                className="rounded-full bg-secondary-500 p-2"
+              className={` gap-8`}
                 onClick={() => setIsMenuToggled(!isMenuToggled)}
               >
-                <Bars3Icon className="h-6 w-6 text-white" />
+                <Bars3Icon className="h-6 w-6" />
               </button>
             )}
           </div>
@@ -65,15 +68,15 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
 
       {/* MOBILE MENU MODAL */}
       {!isAboveMediumScreens && isMenuToggled && (
-        <aside className="fixed bottom-0 right-0 z-40 h-full w-[300px] bg-primary-100 drop-shadow-xl">
+        <aside className="fixed bottom-0 left-0 z-40 h-full w-[220px] bg-lightpurple bg-opacity-90 drop-shadow-xl">
           {/* CLOSE ICON */}
-          <figure className="flex justify-end p-12">
+          <figure className="flex justify-end p-8">
             <button onClick={() => setIsMenuToggled(!isMenuToggled)}>
-              <XMarkIcon className="h-6 w-6 text-gray-500 hover:transition ease-in-out hover:rotate-[25deg]" />
+              <XMarkIcon className="h-10 w-10 text-darkpurple hover:transition ease-in-out hover:rotate-[45deg]" />
             </button>
           </figure>
           {/* MENU ITEMS */}
-          <div className="ml-[33%] flex flex-col gap-10 text-2xl">
+          <div className="ml-[25%] flex flex-col gap-8 text-2xl">
             <Link
               page="Home"
               selectedPage={selectedPage}

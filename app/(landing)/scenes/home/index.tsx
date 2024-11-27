@@ -9,7 +9,7 @@ import {homeDesign} from "@/lib/styles";
 type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
-
+const button_menu = "bg-hotpink rounded-full text-lg text-white px-6";
 const Home: React.FC<Props> = ({ setSelectedPage }) => {
 
   const [hasMounted, setHasMounted] = useState(false);
@@ -49,19 +49,20 @@ const Home: React.FC<Props> = ({ setSelectedPage }) => {
             }}
           >
             <div className="relative">
-              <div className="before:absolute before:-left-20 before:-top-20 before:z-[-1] md:before:content-evolvetext">
+              <div className="before:absolute -mt-20 ml-11 md:ml-3 before:-left-15 before:-top-50 before:z-[-1] md:before:content-evolvetext">
                 <Image
                   src="/assets/Logo1.png"
                   alt="logo"
-                  width={370} // Set appropriate width
+                  width={350} // Set appropriate width
                   height={200} // Set appropriate height
                 />
               </div>
             </div>
-            <p className="mt-8 text-sm w-7/12">
-              Unrivaled Gym. Unparalleled Training Fitness Classes. World Class
-              Studios to get the Body Shapes That you Dream of.. Get Your Dream
-              Body Now.
+            <p className="mt-5 ml-6 md:ml-1  text-3xl font-bold text-hotpink">WELCOME</p>
+            <p className="mt-0 ml-4 md:ml-1  text-4xl font-bold text-turquoise">TO YOUR SPACE !</p>
+            <p className="mt-4 ml-2 md:ml-2  text-m w-10/12 md:w-6/12  lg:-6/12">Here, you’ll not only strengthen your body but also empower your mind and connect with your inner self. Our programs are designed exclusively for women like you—strong, determined, and ready to become the best version of themselves.</p>
+            <p className="mt-2 ml-2 md:ml-2  text-xl w-10/12  font-bold md:w-6/12 text-lightpurple lg:-6/12">Are you ready to embark on this journey full of energy, purpose, and growth?
+            <br/>Log in now to start turning your goals into reality.
             </p>
           </motion.div>
           {/* ACTIONS */}
@@ -76,16 +77,10 @@ const Home: React.FC<Props> = ({ setSelectedPage }) => {
               visible: { opacity: 1, x: 0 },
             }}
           >
-            <ActionButton setSelectedPage={setSelectedPage}>
-              Join Now
-            </ActionButton>
-            <AnchorLink
-              className="text-sm font-bold text-primary-500 underline hover:text-secondary-500"
-              onClick={() => setSelectedPage(SelectedPage.Contact)}
-              href={`#${SelectedPage.Contact}`}
-            >
-              <p>Learn More</p>
-            </AnchorLink>
+            <div className={`${button_menu} gap-8 mb-10`}>
+                  <a href="/login">Join Now</a>
+                </div>
+            
           </motion.div>
         </div>
         

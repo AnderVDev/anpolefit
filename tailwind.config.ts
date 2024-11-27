@@ -9,7 +9,7 @@ const config: Config = {
   ],
   theme: {
   	extend: {
-  		colors: {
+  		colors: { 
 			hotpink: '#cf51bc',
 			darkpurple: '#1e0748',
 			purple : '#915092',
