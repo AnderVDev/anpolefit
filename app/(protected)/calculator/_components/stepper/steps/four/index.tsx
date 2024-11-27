@@ -15,11 +15,10 @@ import {
   KCAL_TO_GRAMS_CONSTANTS,
   TDCI_CONSTANT,
   WEEKLY_FAT_LOSS_RATE,
-} from "@/lib/calculator";
+} from "@/lib/calculator/calculator";
 import { RadialChart } from "./CaloriesIntakeChart";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { addMacrosAction } from "@/actions/calculator-actions";
-import { NutritionSchema } from "@/lib/zod";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
 interface CaloricIntake {
