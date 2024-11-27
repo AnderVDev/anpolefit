@@ -30,3 +30,15 @@ export interface Account {
   // Relation
   user: string; // The associated User model
 }
+
+
+
+export interface NutritionProfile {
+  userId: string;       // A unique identifier,
+  proteinKcal: number;  // Protein energy in kilocalories
+  proteinGrams: number; // Protein weight in grams
+  carbKcal: number;     // Carbohydrate energy in kilocalories
+  carbGrams: number;    // Carbohydrate weight in grams
+  fatKcal: number;      // Fat energy in kilocalories
+  fatGrams: number;     // Fat weight in grams
+}

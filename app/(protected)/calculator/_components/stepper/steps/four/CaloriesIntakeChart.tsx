@@ -9,21 +9,6 @@ import {
 } from "recharts";
 
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
-import { Card } from "@/components/ui/card";
-
-// const chartData = [
-//   { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-// ];
-
-// const chartConfig = {
-//   visitors: {
-//     label: "Visitors",
-//   },
-//   safari: {
-//     label: "Safari",
-//     color: "hsl(var(--chart-2))",
-//   },
-// } satisfies ChartConfig;
 
 interface RadialProgressProp {
   name: string;
@@ -35,17 +20,16 @@ interface RadialProgressProp {
 }
 
 export function RadialChart({
-  name,
-  valueKcal,
-  valueGrams,
-  total,
+  name = "Empty",
+  valueKcal = 0,
+  valueGrams = 0,
+  total = 0,
   chartData,
   chartConfig,
 }: RadialProgressProp) {
   const intake = (valueKcal / total) * 100;
   // Ensure value is between 0 and 100
   const progressValue = Math.min(Math.max(intake, 0), 100); // Clamp value between 0 and 100
-  console.log(`${name} Progress Value`, progressValue);
 
   const defaultChartData = [
     { name: name, value: progressValue, fill: "hsl(var(--chart-primary))" },
@@ -62,7 +46,7 @@ export function RadialChart({
   const chartContent = chartData || defaultChartData;
   const config = chartConfig || defaultChartConfig;
   return (
-    <Card className="flex flex-col items-center justify-center w-28 h-40 p-0 m-0">
+    <section className="flex flex-col items-center justify-center w-28 h-40 p-0 m-0">
       <h4 className="font-bold">{name}</h4>
       <ChartContainer config={config} className="w-28 h-24  ">
         <RadialBarChart
@@ -115,6 +99,6 @@ export function RadialChart({
           </PolarRadiusAxis>
         </RadialBarChart>
       </ChartContainer>
-    </Card>
+    </section>
   );
 }

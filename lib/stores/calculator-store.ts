@@ -35,7 +35,7 @@ interface StepThreeStore {
 }
 
 export const useStepperCountStore = create<StepState>()((set) => ({
-  step: 4,
+  step: 3,
   previousStep: 1, // Initialize the previousStep state
   increase: () =>
     set((state) => ({

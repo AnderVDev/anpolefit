@@ -1,6 +1,6 @@
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import React, { useCallback, useEffect, useState } from "react";
-
+import React, { useCallback, useEffect, useState, useTransition } from "react";
+import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import {
   useStepOneStore,
@@ -17,6 +17,11 @@ import {
   WEEKLY_FAT_LOSS_RATE,
 } from "@/lib/calculator";
 import { RadialChart } from "./CaloriesIntakeChart";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import { addMacrosAction } from "@/actions/calculator-actions";
+import { NutritionSchema } from "@/lib/zod";
+import { z } from "zod";
+import { useToast } from "@/hooks/use-toast";
 interface CaloricIntake {
   id: string;
   name: string;
@@ -48,12 +53,17 @@ const POLLING_FREQUENCY_MS = 1000;
 
 function StepFour() {
   const decrement = useStepperCountStore((state) => state.decrease);
+  const [isPending, startTransition] = useTransition();
+  const { toast } = useToast();
+  const [error, setError] = useState<string | null>(null);
   const [bmr, setBMR] = useState<number | null>(null);
   const [tdee, setTDEE] = useState<number | null>(null);
   const [tdci, setTDCI] = useState<number>(0);
   const [results, setResults] = useState<CaloricIntake[]>(
     initialCaloricIntakes
   );
+
+  const currentUser = useCurrentUser();
 
   // Step Stores values
   const stepOneData = useStepOneStore((state) => state.formData);
@@ -80,7 +90,7 @@ function StepFour() {
 
       const calculatedTDCI = Math.round(TDCIFormula);
       setTDCI(calculatedTDCI);
-      // setTDCI(Math.round(TDCIFormula));
+
       const percentages = BODY_TYPES_CONSTANTS_PERCENTAGES[stepThreeData];
       const updatedResults = [
         {
@@ -127,13 +137,55 @@ function StepFour() {
   }, [activity, age, bmr, gender, height, stepThreeData, tdee, weight]);
 
   const HandleDataSave = async () => {
-    console.log({
-      "Data saved": stepOneData,
-      Expectation: stepTwoData,
-      "Body Type": stepThreeData,
-      TDCI: tdci,
-      Results: results,
-    });
+    if (!currentUser?.id) {
+      return null;
+    }
+    try {
+      const nutritionData = {
+        userId: currentUser.id,
+        proteinKcal: results.find((r) => r.id === "PROTEIN")?.resultKcal ?? 0,
+        proteinGrams: results.find((r) => r.id === "PROTEIN")?.resultGrams ?? 0,
+        carbKcal:
+          results.find((r) => r.id === "CARBOHYDRATES")?.resultKcal ?? 0,
+        carbGrams:
+          results.find((r) => r.id === "CARBOHYDRATES")?.resultGrams ?? 0,
+        fatKcal: results.find((r) => r.id === "FAT")?.resultKcal ?? 0,
+        fatGrams: results.find((r) => r.id === "FAT")?.resultGrams ?? 0,
+      };
+      console.log({ nutritionData });
+
+      startTransition(async () => {
+        const response = await addMacrosAction(nutritionData);
+        console.log(response);
+        if (response?.error) {
+          setError(response.error);
+        } else {
+          setError(null);
+          toast({
+            description: "Your data has been saved successfully!",
+          });
+        }
+      });
+
+      // console.log({
+      //   "Data saved": stepOneData,
+      //   Expectation: stepTwoData,
+      //   "Body Type": stepThreeData,
+      //   TDCI: tdci,
+      //   Results: results,
+      //   user: currentUser.id,
+      // });
+    } catch (validationError) {
+      if (validationError instanceof z.ZodError) {
+        setError(
+          validationError.errors
+            .map((err) => `${err.path.join(".")}: ${err.message}`)
+            .join(", ")
+        );
+      } else {
+        setError("An unexpected error occurred.");
+      }
+    }
   };
 
   useEffect(() => {
@@ -185,32 +237,36 @@ function StepFour() {
             ))}
           </div>
           {/* <CardDescription>
+            <small>
+              {" "}
               Remember, this estimate is based on your weight, height, age,
               gender, and usual activity level. Use this information to help you
               determine how many calories you should consume to maintain your
-              current weight. On days when you're more active, you’ll need more
-              calories, so don’t hesitate to eat a bit more. On days when you're
-              less active, consider reducing your calorie intake. If your goal
-              is to lose weight, aim to eat fewer calories than you burn or
-              increase your activity level. However, always prioritize
+              current weight. On days when you&apos;re more active, you&apos;ll need more
+              calories, so don&apos;t hesitate to eat a bit more. On days when
+              you&apos;re less active, consider reducing your calorie intake. If
+              your goal is to lose weight, aim to eat fewer calories than you
+              burn or increase your activity level. However, always prioritize
               nutritious meals and avoid cutting calories too drastically.
               Eating too little or losing weight too quickly can be harmful and
               unsafe. Keep it balanced and healthy!
-            </CardDescription> */}
+            </small>
+          </CardDescription> */}
         </CardContent>
       </Card>
-      <section className="flex gap-2">
-        <Button
-          className="bg-purple-400 hover:bg-gray-500 rounded-lg m-0 "
-          type="button"
-          onClick={decrement}
-        >
+      <section className="flex gap-2 mt-2">
+        <Button className=" rounded-lg m-0 " type="button" onClick={decrement}>
           Back
         </Button>
-        <Button className="bg-gray-500 rounded-lg" onClick={HandleDataSave}>
+        <Button
+          className=" rounded-lg"
+          onClick={HandleDataSave}
+          disabled={isPending}
+        >
+          {isPending && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
           Save
         </Button>
-        <Button className="bg-gray-500 rounded-lg ">Next</Button>
+        <Button className=" rounded-lg ">Next</Button>
       </section>
     </div>
   );

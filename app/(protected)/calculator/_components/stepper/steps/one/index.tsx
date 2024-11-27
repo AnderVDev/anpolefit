@@ -3,7 +3,6 @@ import React from "react";
 import GenderCard from "./GenderCard";
 import { Activities, Gender } from "@/types/calculator";
 import Metrics from "./Metrics";
-import { Search, UserRound } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,8 +26,8 @@ import {
 type FormSchema = z.infer<typeof StepOneSchema>;
 
 const genders = [
-  { id: Gender.MALE, gender: Gender.MALE, icon: Search },
-  { id: Gender.FEMALE, gender: Gender.FEMALE, icon: UserRound },
+  { id: Gender.MALE, gender: Gender.MALE },
+  { id: Gender.FEMALE, gender: Gender.FEMALE },
 ];
 
 const activities = [
@@ -56,7 +55,6 @@ const activities = [
 
 function StepOne() {
   const increment = useStepperCountStore((state) => state.increase);
-  const currentStep = useStepperCountStore((state) => state.step);
   const setStepOneData = useStepOneStore((state) => state.setFormData);
   const stepOneData = useStepOneStore((state) => state.formData);
   const form = useForm<FormSchema>({
@@ -84,9 +82,7 @@ function StepOne() {
     setValue("activity", activityId);
   };
 
-  const onSubmit: SubmitHandler<FormSchema> = async (
-    values: z.infer<typeof StepOneSchema>
-  ) => {
+  const onSubmit: SubmitHandler<FormSchema> = async () => {
     const { age, metrics, gender, activity } = watchAllFields;
     setStepOneData({
       age: age,
@@ -96,9 +92,6 @@ function StepOne() {
       activity: activity,
     });
     increment();
-    console.log("Form values", values);
-    console.log("Current Step value", currentStep);
-    console.log("Step One Store", stepOneData);
   };
   return (
     <>
@@ -125,7 +118,6 @@ function StepOne() {
                               <GenderCard
                                 key={gender.id}
                                 gender={gender.gender}
-                                icon={gender.icon}
                                 selected={gender.id === field.value}
                                 onSelect={() => {
                                   field.onChange(gender.id);
@@ -231,7 +223,7 @@ function StepOne() {
             </Card>
           </Card>
 
-          <Button className="bg-gray-500 rounded-lg m-0 " type="submit">
+          <Button className="rounded-lg m-0 " type="submit">
             Next
           </Button>
         </form>

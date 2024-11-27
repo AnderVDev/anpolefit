@@ -5,8 +5,8 @@ import {
 import { Card } from "@/components/ui/card";
 import React, { useState } from "react";
 import OptionsCard from "../../OptionsCards";
-import buildImage from "@/public/assets/Logo Anpolefit_13.png";
-import recompositionImage from "@/public/assets/Logo Anpolefit_13.png";
+import buildImage from "@/public/assets/foto1.png";
+import recompositionImage from "@/public/assets/foto1.png";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -41,9 +41,8 @@ const expectations = [
 ];
 
 function StepTwo() {
-  const currentStep = useStepperCountStore((state) => state.step);
   const increment = useStepperCountStore((state) => state.increase);
-  const decrement = useStepperCountStore((state)=> state.decrease)
+  const decrement = useStepperCountStore((state) => state.decrease);
   const stepTwoData = useStepTwoStore((state) => state.expectations);
   const setStepTwoData = useStepTwoStore((state) => state.setExpectations);
   const [selectedExpectation, setSelectedExpectation] =
@@ -63,15 +62,9 @@ function StepTwo() {
     setValue("expectation", expectationId);
   };
 
-  const onSubmit: SubmitHandler<FormSchema> = (
-    values: z.infer<typeof StepTwoSchema>
-  ) => {
+  const onSubmit: SubmitHandler<FormSchema> = () => {
     const { expectation } = watchAllFields;
     setStepTwoData(expectation);
-
-    console.log("Form values", values);
-    console.log("Current Step value", currentStep);
-    console.log("Step Two Store", stepTwoData);
     increment();
   };
 
@@ -86,7 +79,7 @@ function StepTwo() {
           control={control}
           name="expectation"
           render={({ field }) => (
-            <FormItem className="flex flex-col items-center justify-center my-2">
+            <FormItem className="flex flex-col items-center justify-center max-w-xl h-auto">
               {/* <FormLabel className="text-base font-bold">Expectation</FormLabel> */}
               <FormControl>
                 <Card className="cursor-pointer gap-0 border border-gray-200 rounded-lg">
@@ -114,14 +107,10 @@ function StepTwo() {
           )}
         />
         <section className="flex gap-2">
-          <Button
-            className="bg-slate-600 hover:bg-gray-500 rounded-lg m-0 "
-            type="button"
-            onClick={decrement}
-          >
+          <Button className="rounded-lg m-0 " type="button" onClick={decrement}>
             Back
           </Button>
-          <Button className="bg-gray-500 rounded-lg m-0 " type="submit">
+          <Button className="rounded-lg m-0 " type="submit">
             Next
           </Button>
         </section>

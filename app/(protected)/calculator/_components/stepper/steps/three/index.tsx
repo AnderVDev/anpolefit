@@ -1,9 +1,9 @@
 import { Card } from "@/components/ui/card";
 import React, { useState } from "react";
 import OptionsCard from "../../OptionsCards";
-import ectomorphBody from "@/public/assets/Logo Anpolefit_13.png";
-import mesomorphBody from "@/public/assets/Logo Anpolefit_13.png";
-import endomorphBody from "@/public/assets/Logo Anpolefit_13.png";
+import ectomorphBody from "@/public/assets/foto1.png";
+import mesomorphBody from "@/public/assets/foto1.png";
+import endomorphBody from "@/public/assets/foto1.png";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -48,7 +48,6 @@ const bodyTypes = [
 ];
 
 function StepThree() {
-  const currentStep = useStepperCountStore((state) => state.step);
   const increment = useStepperCountStore((state) => state.increase);
   const decrement = useStepperCountStore((state) => state.decrease);
   const stepThreeData = useStepThreeStore((state) => state.bodyType);
@@ -71,16 +70,10 @@ function StepThree() {
     setValue("bodyType", bodyTypeId);
   };
 
-  const onSubmit: SubmitHandler<FormSchema> = (
-    values: z.infer<typeof StepThreeSchema>
-  ) => {
+  const onSubmit: SubmitHandler<FormSchema> = () => {
     const { bodyType } = watchAllFields;
 
     setStepThreeData(bodyType);
-
-    console.log("Form values", values);
-    console.log("Current Step value", currentStep);
-    console.log("Step Three Store", stepThreeData);
     increment();
   };
 
@@ -90,11 +83,12 @@ function StepThree() {
         onSubmit={handleSubmit(onSubmit)}
         className="flex items-center justify-center flex-col flex-grow p-4 gap-2"
       >
+        {/* <Card className="flex items-center justify-center flex-col flex-grow border border-gray-200  max-w-2xl max-h-96 rounded-lg gap-2 p-0 m-0"> */}
         <FormField
           control={control}
           name="bodyType"
           render={({ field }) => (
-            <FormItem className="flex flex-col items-center justify-center my-2">
+            <FormItem className="flex flex-col items-center justify-center  max-w-2xl h-auto">
               {/* <FormLabel className="text-base font-bold">Expectation</FormLabel> */}
               <FormControl>
                 <Card className="cursor-pointer gap-0 border border-gray-200 rounded-lg">
@@ -119,15 +113,12 @@ function StepThree() {
             </FormItem>
           )}
         />
+        {/* </Card> */}
         <section className="flex gap-2">
-          <Button
-            className="bg-slate-600 hover:bg-gray-500 rounded-lg m-0 "
-            type="button"
-            onClick={decrement}
-          >
+          <Button className="rounded-lg m-0 " type="button" onClick={decrement}>
             Back
           </Button>
-          <Button className="bg-gray-500 rounded-lg m-0 " type="submit">
+          <Button className=" rounded-lg m-0 " type="submit">
             Next
           </Button>
         </section>

@@ -1,6 +1,6 @@
 export enum Gender {
-  MALE = "male",
-  FEMALE = "female",
+  MALE = "MALE",
+  FEMALE = "FEMALE",
 }
 export enum Activities {
   SEDENTARY = "SEDENTARY",
@@ -9,8 +9,8 @@ export enum Activities {
   VERY = "VERY",
 }
 export enum Expectations {
-  BUILD = "build",
-  RECOMPOSITION = "recomposition",
+  BUILD = "BUILD",
+  RECOMPOSITION = "RECOMPOSITION",
 }
 export enum BodyTypes {
   ECTOMORPH = 'ECTOMORPH',

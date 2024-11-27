@@ -155,5 +155,5 @@ export const newPasswordAction = async (
     },
   });
 
-  return { success: "Password updated" }
+  return { success: "Password updated" };
 };

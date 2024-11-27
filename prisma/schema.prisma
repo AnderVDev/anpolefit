@@ -66,3 +66,16 @@ model PasswordResetToken {
 
   @@unique([email, token])
 }
+
+model UserNutritionProfiles {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String   @unique
+  proteinKcal  Int
+  proteinGrams Int
+  carbKcal     Int
+  carbGrams    Int
+  fatKcal      Int
+  fatGrams     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
