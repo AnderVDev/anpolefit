@@ -7,39 +7,39 @@ import Classes from "./Classes";
 
 const classes: Array<ClassType> = [
   {
-    name: "Weight Training Classes",
+    name: "Online Training Plan",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque modi cum doloremque amet veritatis libero placeat non iure dignissimos porro suscipit totam voluptatibus cupiditate, voluptatum commodi incidunt nostrum iusto. Eos.",
+      "We’ll train together five days a week, connecting via Zoom to move, dance, meditate, and strengthen our connection with ourselves. We’ll break through mental barriers and enjoy the transformative power of movement. This is your chance to connect, grow, and feel better than ever! Join us and experience the change!",
     image: image1,
   },
   {
-    name: "Yoga  Classes",
+    name: "Live Training Plan",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque modi cum doloremque amet veritatis libero placeat non iure dignissimos porro suscipit totam voluptatibus cupiditate, voluptatum commodi incidunt nostrum iusto. Eos.",
+      "This plan is designed to help you enjoy movement. I’ll guide you in person, explaining each exercise in detail so you can train safely and avoid injuries, while keeping your menstrual cycle in mind. Plus, you’ll have continuous support through WhatsApp so you never feel alone in the process.  It’s the personalized guidance you need to feel strong and connected to your body!",
     image: image1,
   },
   {
-    name: "Ab Core Classes",
+    name: "Energizing Workouts",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque modi cum doloremque amet veritatis libero placeat non iure dignissimos porro suscipit totam voluptatibus cupiditate, voluptatum commodi incidunt nostrum iusto. Eos.",
+      "Our workouts are not just about sweating but also about empowering you. From strength sessions to high-impact cardio, every class is designed to help you unlock your full potential and achieve your goals with confidence.",
     image: image1,
   },
   {
-    name: "Adventure Classes",
+    name: "Mindful Movements",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque modi cum doloremque amet veritatis libero placeat non iure dignissimos porro suscipit totam voluptatibus cupiditate, voluptatum commodi incidunt nostrum iusto. Eos.",
+      "For those moments when you need to reconnect with your body and mind, we offer yoga and mindfulness classes. Each breath helps you release tension, find calm, and balance your energy.",
     image: image1,
   },
   {
-    name: "Fitness Classes",
+    name: "Fun in Motion",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque modi cum doloremque amet veritatis libero placeat non iure dignissimos porro suscipit totam voluptatibus cupiditate, voluptatum commodi incidunt nostrum iusto. Eos.",
+      "Because working out should also be fun, our dance and Zumba classes let you unleash your creativity, enjoy the rhythm, and move your body with joy and energy.",
     image: image1,
   },
   {
-    name: "Training Classes",
+    name: "Classes Tailored to You",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque modi cum doloremque amet veritatis libero placeat non iure dignissimos porro suscipit totam voluptatibus cupiditate, voluptatum commodi incidunt nostrum iusto. Eos.",
+      "Whether you're looking to improve flexibility, tone your body, or simply feel better about yourself, our classes are adapted to different levels and needs. Every woman is unique, and we make sure to provide an inclusive and flexible space for all.",
     image: image1,
   },
 ];
@@ -68,8 +68,10 @@ const OurClasses = ({ setSelectedPage }: Props) => {
           <div className="md:w-3/5">
             <HText>OUR <span className="text-darkpurple">CLASSES</span></HText>
             <p className="py-5  text-xl">
-            Our workouts will not only make you sweat, but they will also empower you. From strength sessions to high-impact cardio, each class is designed to help you unleash your full potential and achieve your goals with confidence.
-            </p>
+            Our workouts will not only make you sweat, but they will also empower you. From strength sessions to high-impact cardio, each class is designed to help you unleash your full potential and achieve your goals with confidence.</p>
+            <p className="font-bold mt-4">Progressive sessions tailored to the equipment you have at home or at the gym. We’ll meet every day from Monday to Friday to build the habit together.
+            Trust me, it’ll be fun!</p>
+            
           </div>
         </motion.div>
         <div className="mt-10 h-[353px] w-full overflow-x-auto overflow-y-hidden">

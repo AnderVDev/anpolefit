@@ -1,11 +1,12 @@
 import {
-  ChatBubbleLeftRightIcon,
-  ChatBubbleLeftIcon,
-  PaperAirplaneIcon,
-  RssIcon,
-  MicrophoneIcon,
+  HomeIcon,
+  UserGroupIcon,
+  ChatBubbleOvalLeftEllipsisIcon,
+  HandThumbUpIcon,
+  
 } from "@heroicons/react/24/solid";
 import Image from 'next/image';
+import Link from "../navbar/Link";
 const button_menu = "bg-hotpink rounded-full text-lg text-white px-2";
 
 // type Props = {};
@@ -29,23 +30,23 @@ const Footer = () => {
           <small>©Anpolefit All Rights Reserved.</small>
         </div>
         <div className="mt-16 basis-1/4 md:mt-0">
-          <h4 className="font-bold">This is a Link</h4>
+          <h4 className="font-bold">Our Site</h4>
           <p className={iconStyle}>
-          <ChatBubbleLeftRightIcon className="h-6 w-6" />
-            This is a Link
+          <HomeIcon className="h-6 w-6" />
+            <a href="/">Home</a>
           </p>
           <p className={iconStyle}>
-          <PaperAirplaneIcon className="h-6 w-6 rotate-[-45deg]" />
-            Telegram Group
-          </p>
-          <p className={iconStyle}>
-            <RssIcon className="h-6 w-6"/>
-            This is another Link
+            <UserGroupIcon className="h-6 w-6"/>
+            <a href="/#aboutus">About Us</a>
             </p>
           <p className={iconStyle}>
-            <MicrophoneIcon className="h-6 w-6" />
-            Lorem ipsum dolor
+            <ChatBubbleOvalLeftEllipsisIcon className="h-6 w-6" />
+            <a href="/#classes">Classes</a>
             </p>
+          <p className={iconStyle}>
+          <HandThumbUpIcon className="h-6 w-6 rotate-[-45deg]" />
+          <a href="/login">Become a member</a>
+          </p>  
         </div>
         <div className="mt-16 basis-1/4 md:mt-0">
         
@@ -53,14 +54,14 @@ const Footer = () => {
           <p className="my-5">
           Subscribe to our newsletter and stay up to date with news, tips, and updates on how to live a healthy lifestyle and achieve your wellness goals.
           </p>
-          <p className="my-5 flex gap-2">
+
             
 
 
 
-          <form className="max-w w-full">
+<form className="max-w w-full">
   <div className="mb-5">
-    <label for="email" class="block mb-1 text-sm font-medium text-hotpink">Your email</label>
+    <label className="block mb-1 text-sm font-medium text-hotpink">Your email</label>
     <input type="email" id="email" className="bg-white mb-2 bg-opacity-20 border-2 border-hotpink text-white text-sm rounded-3xl  block w-full p-1.5 " placeholder="name@mail.com" required />
   </div>
 
@@ -79,7 +80,7 @@ const Footer = () => {
 
 
 
-          </p>
+
         </div>
       </div>
     </footer>

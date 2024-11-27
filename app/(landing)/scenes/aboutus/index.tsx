@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { SelectedPage } from "@/lib/types";
 import HText from "../../shared/HText";
-import ActionButton from "../../shared/ActionButton";
 import Image from 'next/image';
  
 type Props = {
@@ -88,7 +87,7 @@ const AboutUs: React.FC<Props> = ({ setSelectedPage }) => {
           {aboutusData.map((benefit) => (
             <div key={benefit.title} className="text-center bg-white bg-opacity-20 border-solid border-lightturquoise border p-4 shadow-xl md:w-1/3 rounded flex-1  mt-10  ">
               <div className="text-4xl">{benefit.icon}</div>
-              <h3 className="font-bold text-hotpink">{benefit.title}</h3>
+              <h3 className="font-bold text-hotpink text-xl">{benefit.title}</h3>
               <p>{benefit.description}</p>
             </div>
           ))}
@@ -120,7 +119,8 @@ const AboutUs: React.FC<Props> = ({ setSelectedPage }) => {
 
               <HText>COACHING <span className="text-hotpink">WITH CARE</span></HText>
               <p className="mt-2 mb-0 text-xl">
-              Our training programs combine expertise with empathy, offering guidance that goes beyond exercise to nurture your physical and emotional health.
+              Our training programs combine expertise with empathy, nurturing your physical and emotional health.
+              <br/> <br/> Join us today and enjoy personalized coaching, tailored meal plans, progress tracking, and a supportive community!
               </p>
             </motion.div>
 
