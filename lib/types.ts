@@ -1,5 +1,7 @@
 //-----> Landing <---------------
 
+import { StaticImageData } from "next/image";
+
 //navbar
 export enum SelectedPage {
   Home = "home",
@@ -11,7 +13,7 @@ export enum SelectedPage {
 export interface ClassType{
   name: string,
   description?: string,
-  image: string,
+  image: StaticImageData,
 }
 
 // Prima Schema

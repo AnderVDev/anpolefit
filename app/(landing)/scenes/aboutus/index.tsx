@@ -69,7 +69,7 @@ const AboutUs: React.FC<Props> = ({ setSelectedPage }) => {
             visible: { opacity: 1, x: 0 },
           }}
         >
-          <HText>MORE THAN <span className="text-hotpink">JUST TRAINING</span></HText>
+          <HText>MORE THAN <span className="text-hotpink font-black">JUST TRAINING</span></HText>
           <p className="mt-4 text-xl">
           We are a space where women come to rediscover themselves—building strength, fostering inner balance, and embracing joy in every movement. Here, fitness is not just about the body; it’s about creating harmony between mind, body, and spirit.
           </p>
@@ -94,13 +94,13 @@ const AboutUs: React.FC<Props> = ({ setSelectedPage }) => {
         </motion.div>
         
         {/* GRAPHICS AND DESCRIPTION */}
-        <div className="mt-16 items-center justify-between gap-20 md:mt-4 md:flex">
+        <div className="mt-16 items-center justify-between gap-5 md:mt-4 md:flex">
           {/* GRAPHIC */}
           <Image
                   src="/assets/photo001.png"
                   alt="logo"
-                  width={500} // Set appropriate width
-                  height={200} // Set appropriate height
+                  width={800} // Set appropriate width
+                  height={400} // Set appropriate height
                 />
 
           {/* DESCRIPTION */}
@@ -117,7 +117,7 @@ const AboutUs: React.FC<Props> = ({ setSelectedPage }) => {
             >
               
 
-              <HText>COACHING <span className="text-hotpink">WITH CARE</span></HText>
+              <HText>COACHING <span className="text-hotpink  font-black">WITH CARE</span></HText>
               <p className="mt-2 mb-0 text-xl">
               Our training programs combine expertise with empathy, nurturing your physical and emotional health.
               <br/> <br/> Join us today and enjoy personalized coaching, tailored meal plans, progress tracking, and a supportive community!

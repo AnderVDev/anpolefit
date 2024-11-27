@@ -1,10 +1,9 @@
 import { SelectedPage } from "@/lib/types";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import AnchorLink from "react-anchor-link-smooth-scroll";
-import ActionButton from "../../shared/ActionButton";
 import Image from 'next/image';
 import {homeDesign} from "@/lib/styles";
+import HText from "../../shared/HText";
 
 type Props = {
   setSelectedPage: (value: SelectedPage) => void;
@@ -55,11 +54,12 @@ const Home: React.FC<Props> = ({ setSelectedPage }) => {
                   alt="logo"
                   width={350} // Set appropriate width
                   height={200} // Set appropriate height
+                  className = "mb-8"
                 />
               </div>
             </div>
-            <p className="mt-5 ml-6 md:ml-1  text-3xl font-bold text-hotpink">WELCOME</p>
-            <p className="mt-0 ml-4 md:ml-1  text-4xl font-bold text-turquoise">TO YOUR SPACE !</p>
+            <HText>WELCOME</HText>
+            <HText><span className="text-hotpink font-black text-4xl">TO YOUR SPACE</span></HText>
             <p className="mt-4 ml-2 md:ml-2  text-m w-10/12 md:w-6/12  lg:-6/12">Here, you’ll not only strengthen your body but also empower your mind and connect with your inner self. Our programs are designed exclusively for women like you—strong, determined, and ready to become the best version of themselves.</p>
             <p className="mt-2 ml-2 md:ml-2  text-xl w-10/12  font-bold md:w-6/12 text-lightpurple lg:-6/12">Are you ready to embark on this journey full of energy, purpose, and growth?
             <br/>Log in now to start turning your goals into reality.
