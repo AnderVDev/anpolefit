@@ -1,6 +1,5 @@
 import { Activities, Gender } from "@/types/calculator";
 
-
 export const calculateBMR = (
   gender: Gender | undefined,
   weight: number,
@@ -14,7 +13,6 @@ export const calculateBMR = (
   }
 };
 
-
 export const TDDE_CONSTANTS = {
   SEDENTARY: 1.2,
   LIGHT: 1.375,
@@ -22,7 +20,6 @@ export const TDDE_CONSTANTS = {
   VERY: 1.725,
   EXTREMELY: 1.9,
 };
-
 
 export const calculateTDEE = (bmr: number, activity: Activities) => {
   return bmr * TDDE_CONSTANTS[activity];
@@ -54,16 +51,9 @@ export const KCAL_TO_GRAMS_CONSTANTS = {
   FAT: 9,
 };
 
-
 // Target daily calorie intake (TDCI) = TDEE – (Bodyweight x target weekly fat loss rate x 500*)  *1100 if you use kg
 export const WEEKLY_FAT_LOSS_RATE = 0.0075;
 export const TDCI_CONSTANT = {
   POUND: 500,
   KILOGRAMS: 1100,
 };
-
-
-
-
-
-

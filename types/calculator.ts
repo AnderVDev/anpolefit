@@ -3,17 +3,17 @@ export enum Gender {
   FEMALE = "female",
 }
 export enum Activities {
-  SEDENTARY = "sedentary",
-  LIGHT = "light",
-  MODERATE = "moderate",
-  VERY = "very",
+  SEDENTARY = "SEDENTARY",
+  LIGHT = "LIGHT",
+  MODERATE = "MODERATE",
+  VERY = "VERY",
 }
 export enum Expectations {
   BUILD = "build",
   RECOMPOSITION = "recomposition",
 }
 export enum BodyTypes {
-  ECTOMORPH = "ectomorph",
-  MESOMORPH = "mesomorph",
-  ENDOMORPH = "endomorph",
+  ECTOMORPH = 'ECTOMORPH',
+  MESOMORPH = 'MESOMORPH',
+  ENDOMORPH = 'ENDOMORPH',
 }

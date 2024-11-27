@@ -114,6 +114,8 @@ function StepFour() {
       "Data saved": stepOneData,
       Expectation: stepTwoData,
       "Body Type": stepThreeData,
+      bmr: bmr,
+      tdci: tdci,
     });
   };
   useEffect(() => {
@@ -160,18 +162,18 @@ function StepFour() {
       <Card className="flex flex-col p-4 border border-gray-100 rounded-lg cursor-pointer items-center gap-2 w-96 h-72">
         <CardTitle>Caloric Intakes</CardTitle>
         <CardContent className="flex flex-col justify-center items-center">
-          <RadialChart name={"MacroTest"} valueKcal={50} valueGrams={100} total={100} />
-          {/* <div className="flex items-center ">
+          {/* <RadialChart name={""} valueKcal={50} valueGrams={100} total={100} /> */}
+          <div className="flex items-center ">
             {results.map((intake) => (
-              <CaloricIntakeCard
+              <RadialChart
                 key={intake.id}
                 name={intake.name}
-                resultKcal={intake.resultKcal}
-                resultGrams={intake.resultGrams}
+                valueKcal={intake.resultKcal}
+                valueGrams={intake.resultGrams}
                 total={intake.total}
               />
             ))}
-          </div> */}
+          </div>
           {/* <CardDescription>
               Remember, this estimate is based on your weight, height, age,
               gender, and usual activity level. Use this information to help you
