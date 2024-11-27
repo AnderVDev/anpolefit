@@ -1,4 +1,9 @@
-import { Activities, Gender } from "@/types/calculator";
+import {
+  Activities,
+  BodyTypes,
+  Expectations,
+  Gender,
+} from "@/types/calculator";
 import { object, string, number, nativeEnum, coerce } from "zod";
 //------------------> Authentication Schemas <-------------------//
 export const LoginSchema = object({
@@ -70,4 +75,34 @@ export const StepOneSchema = object({
   activity: nativeEnum(Activities, {
     message: "Must select an Activity",
   }),
+});
+
+export const StepTwoSchema = object({
+  expectation: nativeEnum(Expectations, {
+    message: "Must select an Expectation Body",
+  }),
+});
+
+export const StepThreeSchema = object({
+  bodyType: nativeEnum(BodyTypes, {
+    message: "Must select a Body Type",
+  }),
+});
+
+export const NutritionSchema = object({
+  userId: string({ required_error: "Name is required" }).min(1),
+  proteinKcal: number()
+    .int()
+    .nonnegative("Protein calories must be non-negative"),
+  proteinGrams: number()
+    .int()
+    .nonnegative("Protein grams must be non-negative"),
+  carbKcal: number()
+    .int()
+    .nonnegative("Carbohydrate calories must be non-negative"),
+  carbGrams: number()
+    .int()
+    .nonnegative("Carbohydrate grams must be non-negative"),
+  fatKcal: number().int().nonnegative("Fat calories must be non-negative"),
+  fatGrams: number().int().nonnegative("Fat grams must be non-negative"),
 });
