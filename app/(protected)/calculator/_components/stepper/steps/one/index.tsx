@@ -236,7 +236,6 @@ function StepOne() {
           </Button>
         </form>
       </Form>
-      <button onClick={() => console.log(stepOneData)}>one up</button>
     </>
   );
 }

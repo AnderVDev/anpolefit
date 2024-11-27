@@ -59,7 +59,7 @@ function StepThree() {
   const form = useForm<FormSchema>({
     resolver: zodResolver(StepThreeSchema),
     defaultValues: {
-      bodyType: undefined,
+      bodyType: stepThreeData ?? undefined,
     },
   });
   const { watch, handleSubmit, control, setValue } = form;
@@ -80,7 +80,7 @@ function StepThree() {
 
     console.log("Form values", values);
     console.log("Current Step value", currentStep);
-    console.log("Step One Store", stepThreeData);
+    console.log("Step Three Store", stepThreeData);
     increment();
   };
 
@@ -121,7 +121,7 @@ function StepThree() {
         />
         <section className="flex gap-2">
           <Button
-            className="bg-purple-400 hover:bg-gray-500 rounded-lg m-0 "
+            className="bg-slate-600 hover:bg-gray-500 rounded-lg m-0 "
             type="button"
             onClick={decrement}
           >
