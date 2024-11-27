@@ -1,9 +1,7 @@
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import React, { useCallback, useEffect, useState } from "react";
-// import CaloricIntakeCard from "./CaloricIntakeCard";
+
 import { Button } from "@/components/ui/button";
-// import toast from "react-hot-toast";
-// import axios from "axios";
 import {
   useStepOneStore,
   useStepperCountStore,
@@ -25,17 +23,26 @@ interface CaloricIntake {
   resultKcal: number;
   resultGrams: number;
   total: number;
+  fill: number;
 }
 const initialCaloricIntakes: CaloricIntake[] = [
-  { id: "PROTEIN", name: "Protein", resultKcal: 0, resultGrams: 0, total: 0 },
+  {
+    id: "PROTEIN",
+    name: "Protein",
+    resultKcal: 0,
+    resultGrams: 0,
+    total: 0,
+    fill: 6,
+  },
   {
     id: "CARBOHYDRATES",
     name: "Carbohydrates",
     resultKcal: 0,
     resultGrams: 0,
     total: 0,
+    fill: 4,
   },
-  { id: "FAT", name: "Fat", resultKcal: 0, resultGrams: 0, total: 0 },
+  { id: "FAT", name: "Fat", resultKcal: 0, resultGrams: 0, total: 0, fill: 3 },
 ];
 const POLLING_FREQUENCY_MS = 1000;
 
@@ -43,19 +50,10 @@ function StepFour() {
   const decrement = useStepperCountStore((state) => state.decrease);
   const [bmr, setBMR] = useState<number | null>(null);
   const [tdee, setTDEE] = useState<number | null>(null);
+  const [tdci, setTDCI] = useState<number>(0);
   const [results, setResults] = useState<CaloricIntake[]>(
     initialCaloricIntakes
   );
-  // const [userThread] = useAtom(userThreadAtom);
-  const [tdci, setTDCI] = useState<number>(0);
-  const [proteinKcal, setProteinKcal] = useState<number>(0);
-  const [proteinGrams, setProteinGrams] = useState<number>(0);
-  const [carbKcal, setCarbKcal] = useState<number>(0);
-  const [carbGrams, setCarbGrams] = useState<number>(0);
-  const [fatKcal, setFatKcal] = useState<number>(0);
-  const [fatGrams, setFatGrams] = useState<number>(0);
-  // const { bodyType, weight, gender, activity, height, age, expectation } =
-  //   inputs;
 
   // Step Stores values
   const stepOneData = useStepOneStore((state) => state.formData);
@@ -80,90 +78,89 @@ function StepFour() {
       const TDCIFormula =
         tdee - weight * WEEKLY_FAT_LOSS_RATE * TDCI_CONSTANT["KILOGRAMS"];
 
-      setTDCI(Math.round(TDCIFormula));
+      const calculatedTDCI = Math.round(TDCIFormula);
+      setTDCI(calculatedTDCI);
+      // setTDCI(Math.round(TDCIFormula));
       const percentages = BODY_TYPES_CONSTANTS_PERCENTAGES[stepThreeData];
-
-      setProteinKcal(Math.round((tdci * percentages.PROTEIN) / 100));
-      setProteinGrams(
-        Math.round(proteinKcal / KCAL_TO_GRAMS_CONSTANTS.PROTEIN)
-      );
-
-      setCarbKcal(Math.round((tdci * percentages.CARBOHYDRATE) / 100));
-      setCarbGrams(Math.round(carbKcal / KCAL_TO_GRAMS_CONSTANTS.CARBOHYDRATE));
-
-      setFatKcal(Math.round((tdci * percentages.FAT) / 100));
-      setFatGrams(Math.round(fatKcal / KCAL_TO_GRAMS_CONSTANTS.FAT));
+      const updatedResults = [
+        {
+          id: "PROTEIN",
+          name: "Protein",
+          resultKcal: Math.round((calculatedTDCI * percentages.PROTEIN) / 100),
+          resultGrams: Math.round(
+            (calculatedTDCI * percentages.PROTEIN) /
+              100 /
+              KCAL_TO_GRAMS_CONSTANTS.PROTEIN
+          ),
+          total: calculatedTDCI,
+          fill: 6,
+        },
+        {
+          id: "CARBOHYDRATES",
+          name: "Carbohydrates",
+          resultKcal: Math.round(
+            (calculatedTDCI * percentages.CARBOHYDRATE) / 100
+          ),
+          resultGrams: Math.round(
+            (calculatedTDCI * percentages.CARBOHYDRATE) /
+              100 /
+              KCAL_TO_GRAMS_CONSTANTS.CARBOHYDRATE
+          ),
+          total: calculatedTDCI,
+          fill: 4,
+        },
+        {
+          id: "FAT",
+          name: "Fat",
+          resultKcal: Math.round((calculatedTDCI * percentages.FAT) / 100),
+          resultGrams: Math.round(
+            (calculatedTDCI * percentages.FAT) /
+              100 /
+              KCAL_TO_GRAMS_CONSTANTS.FAT
+          ),
+          total: calculatedTDCI,
+          fill: 3,
+        },
+      ];
+      setResults(updatedResults);
     }
-  }, [
-    activity,
-    age,
-    bmr,
-    carbKcal,
-    fatKcal,
-    gender,
-    height,
-    proteinKcal,
-    stepThreeData,
-    tdci,
-    tdee,
-    weight,
-  ]);
+  }, [activity, age, bmr, gender, height, stepThreeData, tdee, weight]);
 
   const HandleDataSave = async () => {
     console.log({
       "Data saved": stepOneData,
       Expectation: stepTwoData,
       "Body Type": stepThreeData,
-      bmr: bmr,
-      tdci: tdci,
+      TDCI: tdci,
+      Results: results,
     });
   };
+
   useEffect(() => {
     handleTDCIChange();
     const timer = setInterval(handleTDCIChange, POLLING_FREQUENCY_MS);
 
-    setResults([
-      {
-        id: "PROTEIN",
-        name: "Protein",
-        resultKcal: proteinKcal,
-        resultGrams: proteinGrams,
-        total: tdci,
-      },
-      {
-        id: "CARBOHYDRATES",
-        name: "Carbohydrates",
-        resultKcal: carbKcal,
-        resultGrams: carbGrams,
-        total: tdci,
-      },
-      {
-        id: "FAT",
-        name: "Fat",
-        resultKcal: fatKcal,
-        resultGrams: fatGrams,
-        total: tdci,
-      },
-    ]);
     return () => clearInterval(timer);
-  }, [
-    tdci,
-    proteinKcal,
-    carbKcal,
-    fatKcal,
-    proteinGrams,
-    carbGrams,
-    fatGrams,
-    handleTDCIChange,
-  ]);
+  }, [handleTDCIChange]);
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <Card className="flex flex-col p-4 border border-gray-100 rounded-lg cursor-pointer items-center gap-2 w-96 h-72">
+      <Card className="flex flex-col p-4 border border-gray-100 rounded-lg cursor-pointer items-center gap-2 w-96 h-96">
         <CardTitle>Caloric Intakes</CardTitle>
         <CardContent className="flex flex-col justify-center items-center">
-          {/* <RadialChart name={""} valueKcal={50} valueGrams={100} total={100} /> */}
-          <div className="flex items-center ">
+          <RadialChart
+            name="Total"
+            valueKcal={tdci}
+            valueGrams={1}
+            total={tdci}
+            chartData={[
+              { name: "TDCI", value: 100, fill: "hsl(var(--chart-2))" },
+            ]}
+            chartConfig={{
+              TDCI: { label: "Total", color: "hsl(var(--chart-2))" },
+            }}
+          />
+          <div className="flex items-center gap-2">
             {results.map((intake) => (
               <RadialChart
                 key={intake.id}
@@ -171,6 +168,19 @@ function StepFour() {
                 valueKcal={intake.resultKcal}
                 valueGrams={intake.resultGrams}
                 total={intake.total}
+                chartData={[
+                  {
+                    name: intake.name,
+                    value: (intake.resultKcal / intake.total) * 100,
+                    fill: `hsl(var(--chart-${intake.fill.toLocaleString()}))`,
+                  },
+                ]}
+                chartConfig={{
+                  [intake.name]: {
+                    label: intake.name,
+                    color: `hsl(var(--chart-${intake.fill.toLocaleString()}))`,
+                  },
+                }}
               />
             ))}
           </div>

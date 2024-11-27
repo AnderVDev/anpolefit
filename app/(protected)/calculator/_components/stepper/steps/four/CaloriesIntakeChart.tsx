@@ -11,25 +11,27 @@ import {
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { Card } from "@/components/ui/card";
 
-const chartData = [
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-];
+// const chartData = [
+//   { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+// ];
 
-const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  safari: {
-    label: "Safari",
-    color: "hsl(var(--chart-2))",
-  },
-} satisfies ChartConfig;
+// const chartConfig = {
+//   visitors: {
+//     label: "Visitors",
+//   },
+//   safari: {
+//     label: "Safari",
+//     color: "hsl(var(--chart-2))",
+//   },
+// } satisfies ChartConfig;
 
 interface RadialProgressProp {
   name: string;
   valueKcal: number;
   valueGrams: number;
   total: number;
+  chartData?: { name: string; value: number; fill: string }[]; // Customizable chart data
+  chartConfig?: ChartConfig; // Customizable chart config
 }
 
 export function RadialChart({
@@ -37,31 +39,47 @@ export function RadialChart({
   valueKcal,
   valueGrams,
   total,
+  chartData,
+  chartConfig,
 }: RadialProgressProp) {
   const intake = (valueKcal / total) * 100;
   // Ensure value is between 0 and 100
-  const progressValue = Math.min(Math.max(intake, 0), 100);
+  const progressValue = Math.min(Math.max(intake, 0), 100); // Clamp value between 0 and 100
+  console.log(`${name} Progress Value`, progressValue);
 
+  const defaultChartData = [
+    { name: name, value: progressValue, fill: "hsl(var(--chart-primary))" },
+  ];
+
+  // Default chart config if not provided
+  const defaultChartConfig: ChartConfig = {
+    [name]: {
+      label: name,
+      color: "hsl(var(--chart-primary))",
+    },
+  };
+
+  const chartContent = chartData || defaultChartData;
+  const config = chartConfig || defaultChartConfig;
   return (
-    <Card className="flex flex-col items-center justify-center">
-        <h4>{name}</h4>
-      <ChartContainer config={chartConfig} className="w-auto h-40  ">
+    <Card className="flex flex-col items-center justify-center w-28 h-40 p-0 m-0">
+      <h4 className="font-bold">{name}</h4>
+      <ChartContainer config={config} className="w-28 h-24  ">
         <RadialBarChart
-          data={chartData}
-          startAngle={0}
-          endAngle={250}
-          innerRadius={40}
-          outerRadius={55}
-          className="w-26"
+          data={chartContent}
+          startAngle={90}
+          endAngle={450}
+          innerRadius={30}
+          outerRadius={45}
         >
           <PolarGrid
             gridType="circle"
             radialLines={false}
             stroke="none"
             className="first:fill-muted last:fill-background"
-            polarRadius={[44, 38]}
+            polarRadius={[34, 28]}
           />
-          <RadialBar dataKey="visitors" background cornerRadius={10} />
+          <RadialBar dataKey="value" background cornerRadius={10} />
           <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
             <Label
               content={({ viewBox }) => {
@@ -76,17 +94,19 @@ export function RadialChart({
                       <tspan
                         x={viewBox.cx}
                         y={viewBox.cy}
-                        className="fill-foreground text-2xl font-bold"
+                        className="fill-foreground text-xl font-bold"
                       >
                         {valueKcal}
                       </tspan>
-                      <tspan
-                        x={viewBox.cx}
-                        y={(viewBox.cy || 0) + 24}
-                        className="fill-muted-foreground"
-                      >
-                        {name !== "total" && valueGrams.toLocaleString()}g
-                      </tspan>
+                      {name !== "Total" && (
+                        <tspan
+                          x={viewBox.cx}
+                          y={(viewBox.cy || 0) + 16}
+                          className="fill-muted-foreground"
+                        >
+                          {valueGrams.toLocaleString()}g
+                        </tspan>
+                      )}
                     </text>
                   );
                 }
