@@ -1,40 +1,59 @@
-import { SelectedPage, ClassType } from "@/lib/types";
+import { SelectedPage,  ClassType} from "@/lib/types";
 import image1 from "../../../../public/assets/foto1.png";
 import { motion } from "framer-motion";
 import HText from "../../shared/HText";
-import Image from 'next/image';
+import Classes from "./Classes";
 
-// Importa Swiper y su módulo de navegación
-import SwiperCore, { Navigation } from 'swiper';
-// Importa los estilos de Swiper
-import 'swiper/swiper-bundle.css';
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import Class from "./Class";
-
-// Inicializa Swiper con el módulo de navegación
-SwiperCore.use([Navigation]);
 
 const classes: Array<ClassType> = [
-  { name: "Weight Training Classes", description: "Description 1", image: image1 },
-  { name: "Yoga Classes", description: "Description 2", image: image1 },
-  { name: "Ab Core Classes", description: "Description 3", image: image1 },
-  { name: "Adventure Classes", description: "Description 4", image: image1 },
-  { name: "Fitness Classes", description: "Description 5", image: image1 },
-  { name: "Training Classes", description: "Description 6", image: image1 },
+  {
+    name: "Weight Training Classes",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque modi cum doloremque amet veritatis libero placeat non iure dignissimos porro suscipit totam voluptatibus cupiditate, voluptatum commodi incidunt nostrum iusto. Eos.",
+    image: image1,
+  },
+  {
+    name: "Yoga  Classes",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque modi cum doloremque amet veritatis libero placeat non iure dignissimos porro suscipit totam voluptatibus cupiditate, voluptatum commodi incidunt nostrum iusto. Eos.",
+    image: image1,
+  },
+  {
+    name: "Ab Core Classes",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque modi cum doloremque amet veritatis libero placeat non iure dignissimos porro suscipit totam voluptatibus cupiditate, voluptatum commodi incidunt nostrum iusto. Eos.",
+    image: image1,
+  },
+  {
+    name: "Adventure Classes",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque modi cum doloremque amet veritatis libero placeat non iure dignissimos porro suscipit totam voluptatibus cupiditate, voluptatum commodi incidunt nostrum iusto. Eos.",
+    image: image1,
+  },
+  {
+    name: "Fitness Classes",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque modi cum doloremque amet veritatis libero placeat non iure dignissimos porro suscipit totam voluptatibus cupiditate, voluptatum commodi incidunt nostrum iusto. Eos.",
+    image: image1,
+  },
+  {
+    name: "Training Classes",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque modi cum doloremque amet veritatis libero placeat non iure dignissimos porro suscipit totam voluptatibus cupiditate, voluptatum commodi incidunt nostrum iusto. Eos.",
+    image: image1,
+  },
 ];
 
 type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-const Classes = ({ setSelectedPage }: Props) => {
+const OurClasses = ({ setSelectedPage }: Props) => {
   return (
-    <section id="ourclasses" className="w-full bg-primary-100 py-40">
+    <section id="classes" className="w-full bg-primary-100 py-40">
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.Classes)}
       >
-        {/* Título */}
         <motion.div
           className="mx-auto w-5/6"
           initial="hidden"
@@ -49,38 +68,28 @@ const Classes = ({ setSelectedPage }: Props) => {
           <div className="md:w-3/5">
             <HText>OUR CLASSES</HText>
             <p className="py-5">
-              Explore our wide range of classes designed to suit your fitness goals. From weight training to yoga, we have something for everyone.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
+              eaque, incidunt error esse, tempora natus eius quod doloribus
+              aperiam, eum ad pariatur. Consectetur deserunt recusandae
+              voluptatem blanditiis dignissimos. Eum, cupiditate.
             </p>
           </div>
         </motion.div>
-
-        {/* Carrusel */}
-        <div className="mt-10">
-          <Swiper
-            spaceBetween={20}
-            slidesPerView={1}
-            navigation // Habilita la navegación
-            breakpoints={{
-              640: { slidesPerView: 1 },
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-            className="h-[353px]"
-          >
-            {classes.map((item, index) => (
-              <SwiperSlide key={`${item.name}-${index}`}>
-                <Class
-                  name={item.name}
-                  description={item.description}
-                  image={item.image}
-                />
-              </SwiperSlide>
+        <div className="mt-10 h-[353px] w-full overflow-x-auto overflow-y-hidden">
+          <ul className="w-[2800px] whitespace-nowrap">
+            {classes.map((item: ClassType, index) => (
+              <Classes
+                key={`${item.name}-${index}`}
+                name={item.name}
+                description={item.description}
+                image={item.image}
+              />
             ))}
-          </Swiper>
+          </ul>
         </div>
       </motion.div>
     </section>
   );
 };
 
-export default Classes;
+export default OurClasses;

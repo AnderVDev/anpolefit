@@ -60,6 +60,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar collapsible="icon" {...props}>
       {/* Header section */}
       <SidebarHeader>
+        <a href="/">
         <Image
           src="/assets/Logo Anpolefit_16.png"
           alt="Logo"
@@ -68,6 +69,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           height={100} // Proportional height to maintain the aspect ratio
           priority
         />
+        </a>
+        
       </SidebarHeader>
       {/* Main section */}
       <SidebarContent>

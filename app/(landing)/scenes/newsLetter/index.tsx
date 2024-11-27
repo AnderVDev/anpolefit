@@ -3,7 +3,7 @@ import React from "react";
 // type Props = {}
 
 // function index({}: Props) {
-function index() {
+function newsLetter() {
   return (
     <>
       <div>News Letter</div>
@@ -12,4 +12,4 @@ function index() {
   );
 }
 
-export default index;
+export default newsLetter;

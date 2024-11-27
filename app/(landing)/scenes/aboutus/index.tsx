@@ -4,7 +4,7 @@ import { SelectedPage } from "@/lib/types";
 import HText from "../../shared/HText";
 import ActionButton from "../../shared/ActionButton";
 import Image from 'next/image';
-
+ 
 type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
@@ -38,7 +38,7 @@ const AboutUs: React.FC<Props> = ({ setSelectedPage }) => {
     return null;
   }
 
-  const container = {
+  const container = { 
     hidden: { opacity: 0, scale: 0.8 },
     visible: { opacity: 1, scale: 1 },
   };

@@ -14,10 +14,10 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
   const flexBetween = "flex items-center justify-between";
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
   const isAboveMediumScreens = useMediaQuery("(min-width:1060px)");
-  const navbarBackground = isTopOfPage ? "" : "bg-primary-100 drop-shadow";
+  const navbarBackground = isTopOfPage ? "" : "bg-hotpink drop-shadow bg-opacity-80";
 
   return (
-    <nav className="w-10/12 ">
+    <nav className="w-10/12">
       <div className={`${navbarBackground} ${flexBetween} fixed top-0 z-30 w-full py-8`}>
         <div className={`${flexBetween}  mx-auto w-5/6`}>
           <div className={`${flexBetween} w-full gap-16`}>
@@ -27,30 +27,25 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
             {/* RIGHT SIDE NAVBAR */}
             {isAboveMediumScreens ? (
               <div className={`${flexBetween} w-full`}>
-                <div className={`${flexBetween} gap-8 text-sm text-white`}>
+                <div className={`${flexBetween} gap-8 text-xl`}>
                   <Link
                     page="Home"
                     selectedPage={selectedPage}
                     setSelectedPage={setSelectedPage}
                   />
                   <Link
-                    page="Benefits"
+                    page="About Us"
                     selectedPage={selectedPage}
                     setSelectedPage={setSelectedPage}
                   />
                   <Link
-                    page="Our Classes"
-                    selectedPage={selectedPage}
-                    setSelectedPage={setSelectedPage}
-                  />
-                  <Link
-                    page="Contact Us"
+                    page="Classes"
                     selectedPage={selectedPage}
                     setSelectedPage={setSelectedPage}
                   />
                 </div>
                 <div className={`${flexBetween} gap-8`}>
-                  <a href="../../../(auth)/login">Sign In</a>
+                  <a href="../../../login">Sign In</a>
                   <ActionButton setSelectedPage={setSelectedPage}>
                     Become a Member
                   </ActionButton>
