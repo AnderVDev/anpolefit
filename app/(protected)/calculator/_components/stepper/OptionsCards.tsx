@@ -19,7 +19,7 @@ const OptionsCard = ({
   selected,
   onSelect,
 }: OptionsCardProps) => {
-  const overlayStyles = `absolute z-30 inset-0 flex flex-col items-center justify-center bg-gray-500 text-center overflow-hidden ${
+  const overlayStyles = `absolute z-30 inset-0 flex flex-col items-center justify-center  bg-darkpurple text-center overflow-hidden ${
     selected ? selectedStyle : unselectedStyle
   } transition-opacity duration-500 hover:opacity-90 focus:opacity-90 shadow-md p-4 sm:p-6 md:p-8 overflow-hidden`;
 
