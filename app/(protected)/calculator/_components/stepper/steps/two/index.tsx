@@ -5,8 +5,8 @@ import {
 import { Card } from "@/components/ui/card";
 import React, { useState } from "react";
 import OptionsCard from "../../OptionsCards";
-import buildImage from "@/public/assets/foto1.png";
-import recompositionImage from "@/public/assets/foto1.png";
+import buildImage from "@/public/assets/Calculator_BuildMuscles.jpg";
+import recompositionImage from "@/public/assets/Calculator_BodyRecompos.jpg";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";

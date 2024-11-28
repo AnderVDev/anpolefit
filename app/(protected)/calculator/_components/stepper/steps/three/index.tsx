@@ -1,9 +1,9 @@
 import { Card } from "@/components/ui/card";
 import React, { useState } from "react";
 import OptionsCard from "../../OptionsCards";
-import ectomorphBody from "@/public/assets/foto1.png";
-import mesomorphBody from "@/public/assets/foto1.png";
-import endomorphBody from "@/public/assets/foto1.png";
+import ectomorphBody from "@/public/assets/Calculator_Ectomorph.jpg";
+import mesomorphBody from "@/public/assets/Calculator_Mesomorph.jpg";
+import endomorphBody from "@/public/assets/Calculator_Endomorph.jpg";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";

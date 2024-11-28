@@ -50,9 +50,17 @@ export async function GET(request: NextRequest) {
   // delete token
   await prisma.verificationToken.delete({
     where: {
-      identifier: verifyToken.identifier,
+      identifier_token: {
+        identifier: verifyToken.identifier,
+        token: verifyToken.token,
+      },
     },
   });
+  // await prisma.verificationToken.delete({
+  //   where: {
+  //     identifier: verifyToken.identifier,
+  //   },
+  // });
 
   // return Response.json({ token });
   redirect("/login?verified=true");
