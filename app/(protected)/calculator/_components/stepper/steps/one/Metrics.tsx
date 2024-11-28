@@ -11,6 +11,7 @@ interface MetricsProps {
 }
 function Metrics({ onWeightChange, onHeightChange }: MetricsProps) {
   const [unitSystem, setUnitSystem] = useState<"metric" | "imperial">("metric");
+  // const [unitSystem, setUnitSystem] = useState<"metric" | "imperial">("metric");
 
   const handleHeightChangeMetric = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);

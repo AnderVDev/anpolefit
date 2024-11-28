@@ -9,7 +9,7 @@ interface GenderCardProps {
   selected: boolean;
   onSelect: () => void;
 }
-function GenderCard({ gender, icon, selected, onSelect }: GenderCardProps) {
+function GenderCard({ gender, selected, onSelect }: GenderCardProps) {
     
   return (
     <div
