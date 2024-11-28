@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { Suspense }  from 'react'
 import { NewPasswordForm } from '../_components/new-password-form'
 
 function NewPassword() {
   return (
-    <NewPasswordForm/>
+    <Suspense fallback={<p>Loading...</p>}>
+      <NewPasswordForm />
+    </Suspense>
   )
 }
 

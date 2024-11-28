@@ -48,12 +48,10 @@ export async function GET(request: NextRequest) {
   });
 
   // delete token
-  await prisma.verificationToken.delete({
+  await prisma.verificationToken.deleteMany({
     where: {
-      identifier_token: {
-        identifier: verifyToken.identifier,
-        token: verifyToken.token,
-      },
+      identifier: verifyToken.identifier,
+      token: verifyToken.token,
     },
   });
   // await prisma.verificationToken.delete({
