@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Calculator, Home, Inbox, Search, Settings } from "lucide-react";
+import { Calculator, Home } from "lucide-react";
 
 import { NavBasic } from "@/components/nav-basic";
 import { NavUser } from "@/components/nav-user";
@@ -51,16 +51,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       {/* Header section */}
       <SidebarHeader>
         <a href="/">
-        <Image
-          src="/assets/Logo Anpolefit_16.png"
-          alt="Logo"
-          className="h-full w-full object-cover"
-          width={200} // Desired width
-          height={100} // Proportional height to maintain the aspect ratio
-          priority
-        />
+          <Image
+            src="/assets/Logo Anpolefit_16.png"
+            alt="Logo"
+            className="h-full w-full object-cover"
+            width={200} // Desired width
+            height={100} // Proportional height to maintain the aspect ratio
+            priority
+          />
         </a>
-        
       </SidebarHeader>
       {/* Main section */}
       <SidebarContent>
