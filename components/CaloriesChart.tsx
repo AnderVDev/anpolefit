@@ -21,9 +21,9 @@ interface RadialProgressProp {
 
 export function RadialChart({
   name = "Empty",
-  valueKcal = 0,
-  valueGrams = 0,
-  total = 0,
+  valueKcal = 1,
+  valueGrams = 1,
+  total = 1,
   chartData,
   chartConfig,
 }: RadialProgressProp) {

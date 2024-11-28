@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/sidebar";
 import { CaretSortIcon } from "@radix-ui/react-icons";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export function NavUser({
   user,
@@ -31,13 +32,16 @@ export function NavUser({
   };
 }) {
   const { isMobile } = useSidebar();
+  const router = useRouter(); // Use useRouter instead of router
 
   const handleLogout = () => {
     signOut({
       callbackUrl: "/login",
     });
   };
-
+  const HandleSettings = () => {
+    router.push("/settings");
+  };
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -84,14 +88,14 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={HandleSettings}>
                 <BadgeCheck />
                 Account
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              {/* <DropdownMenuItem>
                 <Bell />
                 Notifications
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout}>

@@ -16,7 +16,7 @@ import {
   TDCI_CONSTANT,
   WEEKLY_FAT_LOSS_RATE,
 } from "@/lib/calculator/calculator";
-import { RadialChart } from "./CaloriesIntakeChart";
+import { RadialChart } from "@/components/CaloriesChart";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { addMacrosAction } from "@/actions/calculator-actions";
 import { z } from "zod";
@@ -265,7 +265,6 @@ function StepFour() {
           {isPending && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
           Save
         </Button>
-        <Button className=" rounded-lg ">Next</Button>
       </section>
     </div>
   );

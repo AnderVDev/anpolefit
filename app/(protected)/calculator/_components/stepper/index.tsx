@@ -11,29 +11,7 @@ const Stepper = () => {
   const steps = ["About You", "Expectations", "Body Type", "Results"];
   const currentStep = useStepperCountStore((state) => state.step);
 
-  const [complete, setComplete] = useState(false);
-
-  //   const handleStepCompleted = (isCompleted: boolean) => {
-  //     if (isCompleted) {
-  //       setComplete(true);
-  //     }
-  //   };
-
-  //   const handleCurrentStep = (nextStep: number) => {
-  //     if (nextStep > 0 && nextStep <= steps.length) {
-  //       setCurrentStep(nextStep);
-  //       if (nextStep === steps.length) {
-  //         setComplete(true);
-  //       } else {
-  //         setComplete(false);
-  //       }
-  //     }
-  //   };
-
-  //   const handleBackStep = () => {
-  //     setCurrentStep((prev) => Math.max(prev - 1, 1));
-  //     setComplete(false);
-  //   };
+  const [complete] = useState(false);
 
   return (
     <div className="flex flex-col items-center">
