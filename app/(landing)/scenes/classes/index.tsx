@@ -1,10 +1,10 @@
 import { SelectedPage,  ClassType} from "@/lib/types";
-import image1 from "../../../../public/assets/photo002.jpg";
-import image2 from "../../../../public/assets/photo003.jpg";
-import image3 from "../../../../public/assets/photo004.jpg";
-import image4 from "../../../../public/assets/photo005.jpg";
-import image5 from "../../../../public/assets/photo006.jpg";
-import image6 from "../../../../public/assets/photo007.jpg";
+import image1 from "@/public/assets/photo002.jpg";
+import image2 from "@/public/assets/photo003.jpg";
+import image3 from "@/public/assets/photo004.jpg";
+import image4 from "@/public/assets/photo005.jpg";
+import image5 from "@/public/assets/photo006.jpg";
+import image6 from "@/public/assets/photo007.jpg";
 import { motion } from "framer-motion";
 import HText from "../../shared/HText";
 import Classes from "./Classes";
@@ -14,7 +14,7 @@ const classes: Array<ClassType> = [
   {
     name: "Online Training Plan",
     description:
-      "We’ll train together five days a week, connecting via Zoom to move, dance, meditate, and strengthen our connection with ourselves. We’ll break through mental barriers and enjoy the transformative power of movement. This is your chance to connect, grow, and feel better than ever! Join us and experience the change!",
+      "We’ll train together five days a week, connecting via Zoom to move, dance, meditate, and strengthen our connection with ourselves. We’ll break through mental barriers and enjoy the transformation power of movement. This is your chance to connect, grow, and feel better than ever! Join us and experience the change!",
     image: image1,
   },
   {

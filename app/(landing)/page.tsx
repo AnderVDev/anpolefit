@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Home from "./scenes/home";
 import AboutUs from "./scenes/aboutus";
 import Classes from "./scenes/classes";
-import NewsLetter from "./scenes/newsLetter";
 import Footer from "./_components/footer";
 
 import Navbar from "./_components/navbar";
@@ -40,7 +39,6 @@ function App() {
         <Home setSelectedPage={setSelectedPage} />
         <AboutUs setSelectedPage={setSelectedPage} />
         <Classes setSelectedPage={setSelectedPage} />
-        <NewsLetter setSelectedPage={setSelectedPage} />
         <Footer />
 
       </div>

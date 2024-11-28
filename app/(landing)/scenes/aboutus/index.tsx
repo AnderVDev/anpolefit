@@ -78,7 +78,7 @@ const AboutUs: React.FC<Props> = ({ setSelectedPage }) => {
         {/* ABOUT US */}
         
         <motion.div
-          className="mt-5 items-center justify-between gap-8 md:flex flex-nowrap items-stretch"
+          className="mt-5 justify-between gap-8 md:flex flex-nowrap items-stretch"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
