@@ -51,7 +51,7 @@ export async function GET(request: NextRequest) {
 
   await prisma.verificationToken.delete({
     where: {
-      identifier: verifyToken.identifier,
+      identifier: verifyToken.token,
     },
   });
 
