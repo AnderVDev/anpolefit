@@ -13,7 +13,7 @@ import { RadialChart } from "@/components/CaloriesChart";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { getNutritionProfileCurrentUser } from "@/actions/calculator-actions";
 import PremiumFeatureUpgrade from "@/components/premiun-feature";
-import { Button } from "@/components/ui/button";
+
 
 // Helper functions
 const getWeekLabel = (date: Date): string => {
@@ -158,7 +158,6 @@ function Overview() {
   }, []);
   return (
     <div className="h-full w-full flex flex-col items-center justify-center gap-4">
-      <Button onClick={handleNutritionProfile}>Press to Tess</Button>
       {/* Top Section */}
       <section className="w-full grid gap-4 px-4 md:grid-cols-2 lg:grid-cols-8 lg:gap-6">
         <div className="col-span-4">
