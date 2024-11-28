@@ -41,9 +41,9 @@ export const addMacrosAction = async (
       return { error: "User not found!" };
     }
 
-    const existingNutritionProfile  = await getNutritionProfileByUserId(userId)
+    const existingNutritionProfile = await getNutritionProfileByUserId(userId);
 
-    if(existingNutritionProfile){
+    if (existingNutritionProfile) {
       // Update the existing nutrition profile
       await prisma.userNutritionProfiles.update({
         where: {
@@ -58,7 +58,7 @@ export const addMacrosAction = async (
           fatGrams,
         },
       });
-    }else{
+    } else {
       // Create a new nutrition profile
       await prisma.userNutritionProfiles.create({
         data: {
@@ -72,12 +72,37 @@ export const addMacrosAction = async (
         },
       });
     }
-    
+
     return { success: true, message: "Nutrition data saved successfully." };
   } catch (error) {
     console.log(error);
     // Handle specific database errors
 
     return { error: "An unexpected error occurred." };
+  }
+};
+
+export const getNutritionProfileCurrentUser = async (userId: string) => {
+  try {
+    // Check if the user exists in the database
+    const existingUser = await checkUserExists(userId);
+    if (!existingUser) {
+      return { error: "User not found!" };
+    }
+
+    const existingNutritionProfile = await getNutritionProfileByUserId(userId);
+
+    if (!existingNutritionProfile) {
+      return { error: "Invalid Nutrition Profile." };
+    }
+
+    return {
+      success: true,
+      message: "Nutrition retrieved successfully.",
+      data: existingNutritionProfile,
+    };
+  } catch (error) {
+    console.error("Error checking Nutrition Profile:", error);
+    throw new Error("Failed to verify Nutrition Profile.");
   }
 };
