@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma";
 import { NutritionSchema } from "@/lib/zod";
 import { z } from "zod";
 
+
+
 const checkUserExists = async (id: string) => {
   try {
     return await prisma.user.findUnique({

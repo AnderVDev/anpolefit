@@ -1,5 +1,10 @@
 "use client";
-import { Card } from "@/components/ui/card";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import React, { useEffect, useState } from "react";
 import WelcomeCard from "./_components/welcome-card";
 import Weekly from "./_components/weekly-calendar";
@@ -8,6 +13,7 @@ import { RadialChart } from "@/components/CaloriesChart";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { getNutritionProfileCurrentUser } from "@/actions/calculator-actions";
 import PremiumFeatureUpgrade from "@/components/premiun-feature";
+import { Button } from "@/components/ui/button";
 
 // Helper functions
 const getWeekLabel = (date: Date): string => {
@@ -60,7 +66,7 @@ const generateWeekDays = (
     );
   });
 };
-
+// const POLLING_FREQUENCY_MS = 1000;
 interface NutritionData {
   proteinKcal: number;
   carbKcal: number;
@@ -80,13 +86,17 @@ function Overview() {
     null
   );
 
-  useEffect(() => {
-    setWeekLabel(getWeekLabel(currentWeek));
-  }, [currentWeek]);
 
-  useEffect(() => {
-    handleNutritionProfile();
-  }, []);
+  const handleNutritionProfile = async () => {
+    try {
+      if (!currentUser?.id) return;
+      const response = await getNutritionProfileCurrentUser(currentUser.id);
+      console.log(response);
+      setNutritionData(response?.data ?? null);
+    } catch (error) {
+      console.error("Failed to fetch nutrition profile:", error);
+    }
+  };
 
   const toggleDay = (index: number) => {
     setSelectedDays((prev) =>
@@ -102,17 +112,6 @@ function Overview() {
 
   const handleNextWeek = () => {
     setCurrentWeek((prev) => new Date(prev.setDate(prev.getDate() + 7)));
-  };
-
-  const handleNutritionProfile = async () => {
-    if (!currentUser?.id) return;
-
-    try {
-      const response = await getNutritionProfileCurrentUser(currentUser.id);
-      setNutritionData(response.data);
-    } catch (error) {
-      console.error("Failed to fetch nutrition profile:", error);
-    }
   };
 
   const totalNutrition = nutritionData
@@ -147,9 +146,19 @@ function Overview() {
         },
       ]
     : [];
+  useEffect(() => {
+    setWeekLabel(getWeekLabel(currentWeek));
+  }, [currentWeek]);
 
+  useEffect(() => {
+    handleNutritionProfile();
+    // const timer = setInterval(handleNutritionProfile, POLLING_FREQUENCY_MS);
+
+    // return () => clearInterval(timer);
+  }, []);
   return (
     <div className="h-full w-full flex flex-col items-center justify-center gap-4">
+      <Button onClick={handleNutritionProfile}>Press to Tess</Button>
       {/* Top Section */}
       <section className="w-full grid gap-4 px-4 md:grid-cols-2 lg:grid-cols-8 lg:gap-6">
         <div className="col-span-4">
@@ -169,6 +178,13 @@ function Overview() {
       {/* Bottom Section */}
       <section className="w-full grid gap-4 px-4 md:grid-cols-2 lg:grid-cols-7 lg:gap-6">
         <Card className="col-span-4 flex flex-col items-center justify-center">
+          <CardHeader className="flex items-center text-2xl">
+            <CardTitle>Nutritional Profile</CardTitle>
+            <CardDescription className="flex items-center justify-center text-center">
+              Start with the calories and macros below, and take the first step
+              toward crushing your goal. Let&apos;s make it happen!
+            </CardDescription>
+          </CardHeader>
           <RadialChart
             name="Total"
             valueKcal={totalNutrition}
