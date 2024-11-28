@@ -10,12 +10,12 @@ interface MetricsProps {
   onHeightChange: (value: number ) => void;
 }
 function Metrics({ onWeightChange, onHeightChange }: MetricsProps) {
-  const [unitSystem, setUnitSystem] = useState<"metric" | "imperial">("metric");
+  const [, setUnitSystem] = useState<"metric" | "imperial">("metric");
   // const [unitSystem, setUnitSystem] = useState<"metric" | "imperial">("metric");
 
   const handleHeightChangeMetric = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
-    if (!isNaN(value)) {
+    if (!isNaN(value)&& value >= 0) {
       onHeightChange(value); // value in cm
     }
   };

@@ -6,7 +6,7 @@ import {
   useStepOneStore,
   useStepperCountStore,
   useStepThreeStore,
-  useStepTwoStore,
+  // useStepTwoStore,
 } from "@/lib/stores/calculator-store";
 import {
   BODY_TYPES_CONSTANTS_PERCENTAGES,
@@ -54,7 +54,8 @@ function StepFour() {
   const decrement = useStepperCountStore((state) => state.decrease);
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
-  const [error, setError] = useState<string | null>(null);
+  const [, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
   const [bmr, setBMR] = useState<number | null>(null);
   const [tdee, setTDEE] = useState<number | null>(null);
   const [tdci, setTDCI] = useState<number>(0);
@@ -66,7 +67,7 @@ function StepFour() {
 
   // Step Stores values
   const stepOneData = useStepOneStore((state) => state.formData);
-  const stepTwoData = useStepTwoStore((state) => state.expectations);
+  // const stepTwoData = useStepTwoStore((state) => state.expectations);
   const stepThreeData = useStepThreeStore((state) => state.bodyType);
   const { gender, weight, height, age, activity } = stepOneData;
 
