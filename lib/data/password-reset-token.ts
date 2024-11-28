@@ -9,7 +9,7 @@ interface PasswordResetToken {
 
 export const getPasswordResetTokenByToken = async (
   token: string
-): Promise<PasswordResetToken| null>  => {
+): Promise<PasswordResetToken | null> => {
   try {
     const passwordResetToken = await prisma.passwordResetToken.findUnique({
       where: { token },
@@ -21,13 +21,16 @@ export const getPasswordResetTokenByToken = async (
   }
 };
 
-export const getPasswordResetTokenByEmail = async (email: string) => {
+export const getPasswordResetTokenByEmail = async (
+  email: string
+): Promise<PasswordResetToken | null> => {
   try {
     const passwordResetToken = await prisma.passwordResetToken.findFirst({
       where: { email },
     });
     return passwordResetToken;
   } catch (error) {
-    return error;
+    console.error(error);
+    return null;
   }
 };
