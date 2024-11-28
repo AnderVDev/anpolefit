@@ -2,7 +2,10 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { LoginForm } from "../_components/login-form";
 import Image from "next/image";
-import { UserGroupIcon } from "@heroicons/react/24/solid";
+import { ChatBubbleLeftEllipsisIcon, UserGroupIcon } from "@heroicons/react/24/solid";
+import { CalendarDaysIcon } from "@heroicons/react/24/solid";
+import { ShoppingCartIcon } from "@heroicons/react/24/solid";
+import { CalculatorIcon } from "@heroicons/react/24/solid";
 
 export const metadata: Metadata = {
   title: "Authentication",
@@ -25,7 +28,7 @@ export default function Login() {
           <div className="relative z-20 flex items-center text-lg font-medium">
           
 
-        <section className="bg-white bg-opacity-70 text-darkpurple p-5">
+        <section className="bg-white bg-opacity-70 text-darkpurple p-5 rounded-xl">
         <a href="/">
         <Image
           src="/assets/LogoAnpolefit_4.png"
@@ -37,7 +40,7 @@ export default function Login() {
         />
         </a>
         <div className=" mt-8 ">
-              <UserGroupIcon className="h-10 w-10 float-left mr-1"/>
+              <UserGroupIcon className="h-11 w-11 float-left mr-2 mt-1 bg-white rounded-full p-1"/>
               <h1 className="text-hotpink">Become a Member and Experience the Full Journey</h1>
               <p className="text-lg">
               By joining our community, you will gain access to a personalized experience that allows you to track your progress and achieve your goals more effectively.
@@ -45,7 +48,9 @@ export default function Login() {
         </div>
 
         <div className=" mt-8 ">
-              <UserGroupIcon className="h-6 w-6 float-left"/>
+              
+              
+              <CalendarDaysIcon className="h-11 w-11 float-left mr-2 mt-1 bg-white rounded-full p-1"/>
               <h1 className="text-hotpink">Historical Tracking of Your Progress</h1>
               <p className="text-lg">
               Keep a detailed record of your progress, so you can see how you’re improving in strength, endurance, and overall well-being, celebrating every achievement.
@@ -53,7 +58,7 @@ export default function Login() {
         </div>
 
         <div className=" mt-8 ">
-              <UserGroupIcon className="h-6 w-6 float-left"/>
+              <ShoppingCartIcon  className="h-11 w-11 float-left mr-2 mt-1 bg-white rounded-full p-1"/>
               <h1 className="text-hotpink">Complete Personalized Nutrition Guide</h1>
               <p className="text-lg">
               Receive a meal plan tailored to your specific needs and goals, designed to complement your workouts and help you feel better from the inside out.
@@ -61,7 +66,7 @@ export default function Login() {
         </div>
 
         <div className=" mt-8 ">
-              <UserGroupIcon className="h-6 w-6 float-left"/>
+              <CalculatorIcon className="h-11 w-11 float-left mr-2 mt-1 bg-white rounded-full p-1"/>
               <h1 className="text-hotpink">BMI Calculator</h1>
               <p className="text-lg">
               Assess your current condition with our Body Mass Index BMI calculator, a simple yet effective tool to understand your physical state.
@@ -69,7 +74,7 @@ export default function Login() {
         </div>
         
         <div className=" mt-8 ">
-              <UserGroupIcon className="h-6 w-6 float-left"/>
+              <ChatBubbleLeftEllipsisIcon className="h-11 w-11 float-left mr-2 mt-1 bg-white rounded-full p-1"/>
               <h1 className="text-hotpink">Personalized Tips from Your Coach</h1>
               <p className="text-lg">
               Get direct guidance from your coach with personalized advice on exercises, nutrition, and overall wellness to keep you motivated and on track.
@@ -83,7 +88,7 @@ export default function Login() {
         </div>
         {/* Right side */}
         <div className="lg:p-8">
-          <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px] fixed top-16 right-16">
+          <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <LoginForm OAuthAccountNotLinked={false} />
             <p className="px-8 text-center text-sm text-muted-foreground text-white">
               By clicking continue, you agree to our{" "}

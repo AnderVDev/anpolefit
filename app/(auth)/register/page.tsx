@@ -2,6 +2,10 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { RegisterForm } from "../_components/register-form";
+import { ChatBubbleLeftEllipsisIcon, UserGroupIcon } from "@heroicons/react/24/solid";
+import { CalendarDaysIcon } from "@heroicons/react/24/solid";
+import { ShoppingCartIcon } from "@heroicons/react/24/solid";
+import { CalculatorIcon } from "@heroicons/react/24/solid";
 
 export const metadata: Metadata = {
   title: "Authentication",
@@ -11,72 +15,105 @@ export const metadata: Metadata = {
 export default function SignUp() {
   return (
     <>
-      <div className="md:hidden">
-        <Image
-          src="/examples/authentication-light.png"
-          width={1280}
-          height={843}
-          alt="Authentication"
-          className="block dark:hidden"
-        />
-        <Image
-          src="/examples/authentication-dark.png"
-          width={1280}
-          height={843}
-          alt="Authentication"
-          className="hidden dark:block"
-        />
-      </div>
-      <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-        <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-          <div className="absolute inset-0 bg-zinc-900" />
-          <div className="relative z-20 flex items-center text-lg font-medium">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="mr-2 h-6 w-6"
-            >
-              <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
-            </svg>
-            AnpoleFit
-          </div>
-          <div className="relative z-20 mt-auto">
-            <blockquote className="space-y-2">
-              <p className="text-lg">
-                &ldquo;This library has saved me countless hours of work and
-                helped me deliver stunning designs to my clients faster than
-                ever before.&rdquo;
-              </p>
-              <footer className="text-sm">Sofia Davis</footer>
-            </blockquote>
-          </div>
-        </div>
-        <div className="lg:p-8">
-          <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+      <div
+        style={{ backgroundImage: "url('/assets/background04c.jpg')" }}
+        className="bg-no-repeat bg-center-bottom bg-midpink h-full"
+      >
+        <div className="container relative hidden h-full flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0 bg-transparent">
+          {/* Left side */}
+          <div className="relative hidden h-full flex-col p-10 text-white dark:border-r lg:flex bg-transparent">
+            <div className="absolute inset-0" />
+            <div className="relative z-20 flex items-center text-lg font-medium">
 
-            <RegisterForm />
-            <p className="px-8 text-center text-sm text-muted-foreground">
-              By clicking continue, you agree to our{" "}
-              <Link
-                href="/terms"
-                className="underline underline-offset-4 hover:text-primary"
-              >
-                Terms of Service
-              </Link>{" "}
-              and{" "}
-              <Link
-                href="/privacy"
-                className="underline underline-offset-4 hover:text-primary"
-              >
-                Privacy Policy
-              </Link>
-              .
-            </p>
+            <section className="bg-white bg-opacity-70 text-darkpurple p-5 rounded-2xl">
+          <a href="/">
+        <Image
+          src="/assets/LogoAnpolefit_4.png"
+          alt="Logo"
+          className="h-full w-8/12 object-cover mx-0 my-auto"
+          width={300} // Desired
+          height={100} // Proportional height to maintain the aspect ratio
+          priority
+        />
+        </a>
+
+              <div className="mt-8">
+                <UserGroupIcon className="h-11 w-11 float-left mr-2 mt-1 bg-white rounded-full p-1" />
+                <h1 className="text-hotpink">
+                  Become a Member and Experience the Full Journey
+                </h1>
+                <p className="text-lg">
+                  By joining our community, you will gain access to a personalized
+                  experience that allows you to track your progress and achieve
+                  your goals more effectively.
+                </p>
+              </div>
+
+              <div className="mt-8">
+                <CalendarDaysIcon className="h-11 w-11 float-left mr-2 mt-1 bg-white rounded-full p-1" />
+                <h1 className="text-hotpink">Historical Tracking of Your Progress</h1>
+                <p className="text-lg">
+                  Keep a detailed record of your progress, so you can see how
+                  you’re improving in strength, endurance, and overall well-being,
+                  celebrating every achievement.
+                </p>
+              </div>
+
+              <div className="mt-8">
+                <ShoppingCartIcon className="h-11 w-11 float-left mr-2 mt-1 bg-white rounded-full p-1" />
+                <h1 className="text-hotpink">Complete Personalized Nutrition Guide</h1>
+                <p className="text-lg">
+                  Receive a meal plan tailored to your specific needs and goals,
+                  designed to complement your workouts and help you feel better
+                  from the inside out.
+                </p>
+              </div>
+
+              <div className="mt-8">
+                <CalculatorIcon className="h-11 w-11 float-left mr-2 mt-1 bg-white rounded-full p-1" />
+                <h1 className="text-hotpink">BMI Calculator</h1>
+                <p className="text-lg">
+                  Assess your current condition with our Body Mass Index (BMI)
+                  calculator, a simple yet effective tool to understand your
+                  physical state.
+                </p>
+              </div>
+
+              <div className="mt-8">
+                <ChatBubbleLeftEllipsisIcon className="h-11 w-11 float-left mr-2 mt-1 bg-white rounded-full p-1" />
+                <h1 className="text-hotpink">Personalized Tips from Your Coach</h1>
+                <p className="text-lg">
+                  Get direct guidance from your coach with personalized advice on
+                  exercises, nutrition, and overall wellness to keep you motivated
+                  and on track.
+                </p>
+              </div>
+            </section>
+            </div>
+          </div>
+
+          {/* Right side */}
+          <div className="lg:p-8">
+          <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+              <RegisterForm />
+              <p  className="px-8 text-center text-sm text-muted-foreground text-white">
+                By clicking continue, you agree to our{" "}
+                <Link
+                  href="/terms"
+                  className="underline underline-offset-4 hover:text-primary"
+                >
+                  Terms of Service
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/privacy"
+                  className="underline underline-offset-4 hover:text-primary"
+                >
+                  Privacy Policy
+                </Link>
+                .
+              </p>
+            </div>
           </div>
         </div>
       </div>

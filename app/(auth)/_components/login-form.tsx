@@ -69,7 +69,7 @@ export function LoginForm({ OAuthAccountNotLinked }: LoginFormProps) {
       }
     });
   };
-
+ 
   return (
     <Card className="mx-auto max-w-sm bg-darkpurple bg-opacity-70 shadow-xl border-solid border-midpurple border text-lightpurple">
       <CardHeader>

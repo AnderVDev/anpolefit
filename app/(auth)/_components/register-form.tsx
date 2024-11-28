@@ -30,7 +30,8 @@ import { registerAction } from "@/actions/auth-actions";
 import { signIn } from "next-auth/react";
 
 type FormSchema = z.infer<typeof RegisterSchema>;
-
+const button_menu = "bg-hotpink rounded-full text-lg text-white px-6";
+ 
 export function RegisterForm() {
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -65,7 +66,7 @@ export function RegisterForm() {
   };
 
   return (
-    <Card className="mx-auto max-w-sm">
+    <Card className="mx-auto max-w-sm bg-darkpurple bg-opacity-70 shadow-xl border-solid border-midpurple border text-lightpurple">
       <CardHeader>
         <CardTitle className="text-2xl">Create an account</CardTitle>
         <CardDescription>
@@ -159,7 +160,7 @@ export function RegisterForm() {
             />
 
             {/* Submit Button */}
-            <Button type="submit" disabled={isPending} className="w-full my-2">
+            <Button type="submit" disabled={isPending} className={`${button_menu} w-full my-2`}>
               {isPending && (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               )}
@@ -173,14 +174,14 @@ export function RegisterForm() {
               <span className="w-full border-t" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">
+              <span className="bg-darkpurple px-1 text-muted-foreground text-white">
                 Or continue with
               </span>
             </div>
           </div>
           <Button
             variant="outline"
-            className="w-full"
+            className={`${button_menu} w-full my-2 bg-black border-none`}
             onClick={() => signIn("google")}
           >
             {isPending && (
