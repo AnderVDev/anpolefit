@@ -22,11 +22,11 @@ const data = [
     url: "/overview",
     icon: Home,
   },
-  {
-    title: "Dashboard",
-    url: "/dashboard",
-    icon: Inbox,
-  },
+  // {
+  //   title: "Dashboard",
+  //   url: "/dashboard",
+  //   icon: Inbox,
+  // },
   {
     title: "Calculator",
     url: "/calculator",

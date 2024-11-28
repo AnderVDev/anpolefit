@@ -5,7 +5,6 @@ import WelcomeCard from "./_components/welcome-card";
 import Weekly from "./_components/weekly-calendar";
 import Chat from "./_components/chat";
 import { RadialChart } from "@/components/CaloriesChart";
-import { Button } from "@/components/ui/button";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { getNutritionProfileCurrentUser } from "@/actions/calculator-actions";
 import PremiumFeatureUpgrade from "@/components/premiun-feature";
@@ -152,7 +151,7 @@ function Overview() {
   return (
     <div className="h-full w-full flex flex-col items-center justify-center gap-4">
       {/* Top Section */}
-      <section className="w-full h-1/3 grid px-2 gap-2 md:grid-cols-2 lg:grid-cols-8">
+      <section className="w-full grid gap-4 px-4 md:grid-cols-2 lg:grid-cols-8 lg:gap-6">
         <div className="col-span-4">
           <WelcomeCard />
         </div>
@@ -168,8 +167,8 @@ function Overview() {
       </section>
 
       {/* Bottom Section */}
-      <section className="w-full h-2/3 grid px-2 gap-2 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="col-span-4">
+      <section className="w-full grid gap-4 px-4 md:grid-cols-2 lg:grid-cols-7 lg:gap-6">
+        <Card className="col-span-4 flex flex-col items-center justify-center">
           <RadialChart
             name="Total"
             valueKcal={totalNutrition}
@@ -182,31 +181,39 @@ function Overview() {
               TDCI: { label: "Total", color: "hsl(var(--chart-2))" },
             }}
           />
-          <div className="flex items-center gap-2">
-            {formattedNutritionData.map((intake) => (
-              <RadialChart
-                key={intake.id}
-                name={intake.name}
-                valueKcal={intake.resultKcal}
-                valueGrams={intake.resultGrams}
-                total={intake.total}
-                chartData={[
-                  {
-                    name: intake.name,
-                    value: (intake.resultKcal / intake.total) * 100,
-                    fill: `hsl(var(--chart-${intake.fill}))`,
-                  },
-                ]}
-                chartConfig={{
-                  [intake.name]: {
-                    label: intake.name,
-                    color: `hsl(var(--chart-${intake.fill}))`,
-                  },
-                }}
-              />
-            ))}
-          </div>
-          <Button onClick={handleNutritionProfile}>Refresh Data</Button>
+          <section className="flex flex-col items-center gap-4 p-4">
+            <div className="flex flex-wrap justify-center gap-4">
+              {formattedNutritionData.map((intake) => (
+                <RadialChart
+                  key={intake.id}
+                  name={intake.name}
+                  valueKcal={intake.resultKcal}
+                  valueGrams={intake.resultGrams}
+                  total={intake.total}
+                  chartData={[
+                    {
+                      name: intake.name,
+                      value: (intake.resultKcal / intake.total) * 100,
+                      fill: `hsl(var(--chart-${intake.fill}))`,
+                    },
+                  ]}
+                  chartConfig={{
+                    [intake.name]: {
+                      label: intake.name,
+                      color: `hsl(var(--chart-${intake.fill}))`,
+                    },
+                  }}
+                />
+              ))}
+            </div>
+            <div className="text-center text-sm text-muted-foreground">
+              <p>
+                These results are based on the information you provided, so they
+                are estimates. Track your progress and make changes as needed to
+                reach your goals.
+              </p>
+            </div>
+          </section>
         </Card>
         <Card className="col-span-3 flex items-center justify-center">
           {isCurrentUserAdmin ? <Chat /> : <PremiumFeatureUpgrade />}
