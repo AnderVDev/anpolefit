@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Send } from "lucide-react";
+import { Card } from "@/components/ui/card";
 
 interface Message {
   id: string;
@@ -41,18 +42,19 @@ const Chat: React.FC = () => {
   };
 
   return (
-    <div
+    <Card className="col-span-3 flex flex-col items-center justify-center bg-purpleVariant-300 shadow-xl">
+      <div
       className={cn(
-        "bg-card text-card-foreground rounded-lg shadow-md p-4 flex flex-col h-[500px] w-[400px]"
+        "bg-card text-darkpurple rounded-lg p-4 flex flex-col h-full w-full  bg-purpleVariant-300 shadow-xl"
       )}
     >
       {/* Messages Section */}
-      <div className="flex-1 overflow-y-auto space-y-3 p-4 border rounded-md bg-muted">
+      <div className="flex-1 overflow-y-auto space-y-3 p-4 border rounded-md bg-purpleLight-100">
         {messages.map((message) => (
           <div
             key={message.id}
             className={cn("p-3 rounded-lg", {
-              "bg-primary text-primary-foreground self-end":
+              "bg-darkpurple text-white self-end":
                 message.sender === "user",
               "bg-muted text-muted-foreground self-start":
                 message.sender === "assistant",
@@ -71,11 +73,12 @@ const Chat: React.FC = () => {
           onChange={(e) => setInput(e.target.value)}
           className="flex-1"
         />
-        <Button onClick={handleSendMessage} variant="default">
-          <Send className="w-4 h-4" />
+        <Button onClick={handleSendMessage} variant="default" className="bg-darkpurple">
+          <Send className="w-4 h-4 " />
         </Button>
       </div>
     </div>
+    </Card>
   );
 };
 

@@ -47,7 +47,7 @@ export function RadialChart({
   const config = chartConfig || defaultChartConfig;
   return (
     <section className="flex flex-col items-center justify-center w-28 h-40 p-0 m-0">
-      <h4 className="font-bold">{name}</h4>
+      <h4 className="font-bold text-white">{name}</h4>
       <ChartContainer config={config} className="w-28 h-24  ">
         <RadialBarChart
           data={chartContent}
@@ -78,7 +78,7 @@ export function RadialChart({
                       <tspan
                         x={viewBox.cx}
                         y={viewBox.cy}
-                        className="fill-foreground text-xl font-bold"
+                        className="fill-darkpurple text-xl font-bold "
                       >
                         {valueKcal}
                       </tspan>
@@ -86,7 +86,7 @@ export function RadialChart({
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 16}
-                          className="fill-muted-foreground"
+                          className="fill-darkpurple"
                         >
                           {valueGrams.toLocaleString()}g
                         </tspan>

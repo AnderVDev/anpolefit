@@ -18,6 +18,39 @@ const config: Config = {
         turquoise : '#adcfcd',
         lightturquoise : '#d8edeb',
         midpurple : '#d883c9',
+        purpleVariant: {
+  				'100': '#e9dce9',
+  				'200': '#d3b9d3',
+  				'300': '#bd96be',
+  				'400': '#a773a8',
+  				'500': '#915092',
+  				'600': '#744075',
+  				'700': '#573058',
+  				'800': '#3a203a',
+  				'900': '#1d101d'
+  			},
+        purpleSecondary: {
+  				'100': '#f7e9f1',
+  				'200': '#eed3e4',
+  				'300': '#e6bcd6',
+  				'400': '#dda6c9',
+  				'500': '#d590bb',
+  				'600': '#aa7396',
+  				'700': '#805670',
+  				'800': '#553a4b',
+  				'900': '#2b1d25'
+  			},
+  			purpleLight: {
+  				'100': '#f5eef4',
+  				'200': '#ebdee9',
+  				'300': '#e2cdde',
+  				'400': '#d8bdd3',
+  				'500': '#ceacc8',
+  				'600': '#a58aa0',
+  				'700': '#7c6778',
+  				'800': '#524550',
+  				'900': '#292228'
+  			},
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
