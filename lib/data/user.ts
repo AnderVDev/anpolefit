@@ -1,19 +1,22 @@
 import { prisma } from "../prisma";
+import { User } from "../types";
 
-export const getUserByEmail = async (email: string) => {
+export const getUserByEmail = async (email: string): Promise<User | null> => {
   try {
-    return await prisma.user.findUnique({ where: { email } });
+    const user = await prisma.user.findUnique({ where: { email } });
+    if(!user) return null
+    return user
   } catch (error) {
-    return error;
+    console.error(error);
+    return null;
   }
 };
 
-
 export const getUserById = async (id: string) => {
-    try {
-      return await prisma.user.findUnique({ where: { id } });
-    } catch (error) {
-      return error;
-    }
-  };
-
+  try {
+    return await prisma.user.findUnique({ where: { id } });
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};

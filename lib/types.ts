@@ -17,7 +17,18 @@ export interface ClassType{
 }
 
 // Prima Schema
-
+export interface User {
+  id: string; // ObjectId, stored as a string
+  name: string | null; // Optional field for the user's name
+  email: string| null; // Optional field for the user's email, unique
+  password?: string| null; // Optional field for the user's password
+  emailVerified?: Date| null; // Optional DateTime for when the email was verified (ISO string)
+  image?: string | null; // Optional field for the user's image URL
+  role: 'USER' | 'ADMIN'; // Enum for role, defaults to 'USER'
+  // accounts: Account[]; // List of associated accounts (array of Account objects)
+  createdAt: Date; // DateTime (ISO string) for when the user was created
+  updatedAt: Date; // DateTime (ISO string) for when the user was last updated
+}
 export interface Account {
   id: string; // Corresponds to the MongoDB ObjectId
   userId: string; // Foreign key to the User model, also an ObjectId
@@ -33,9 +44,6 @@ export interface Account {
   session_state?: string | null; // Optional session state
   createdAt: Date; // Timestamp of account creation
   updatedAt: Date; // Timestamp of the last update
-
-  // Relation
-  user: string; // The associated User model
 }
 
 
