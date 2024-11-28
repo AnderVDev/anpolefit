@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
   }
 
   //verify is token already exist
-  const verifyToken = await prisma.verificationToken.findFirst({
+  const verifyToken = await prisma.verificationToken.findUnique({
     where: {
       token,
     },
@@ -51,7 +51,7 @@ export async function GET(request: NextRequest) {
 
   await prisma.verificationToken.delete({
     where: {
-      identifier: verifyToken.token,
+      token, // Use token since it's unique
     },
   });
 
