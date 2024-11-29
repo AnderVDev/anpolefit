@@ -53,10 +53,10 @@ const generateWeekDays = (
       <div
         key={index}
         onClick={() => toggleDay(index)}
-        className={`col-span-1 p-2 text-center rounded-md shadow-md cursor-pointer ${
+        className={`col-span-1 p-2 text-center rounded-md shadow-xl cursor-pointer ${
           isSelected
             ? "bg-green-800 text-primary-foreground"
-            : "bg-secondary text-secondary-foreground"
+            : "bg-white text-darkpurple"
         }`}
       >
         {day.toLocaleDateString("en-US", {
@@ -157,10 +157,10 @@ function Overview() {
     // return () => clearInterval(timer);
   }, []);
   return (
-    <div className="h-full w-full flex flex-col items-center justify-center gap-2 bg-purpleVariant-300 text-white">
+    <div className="h-full w-full flex flex-col items-center justify-center gap-2 bg-purpleLight-100 text-white">
       {/* Top Section */}
       <section className="w-full min-h-56 grid gap-4 px-4 md:grid-cols-2 lg:grid-cols-8 lg:gap-6">
-        <div className="col-span-4 shadow-xl ">
+        <div className="col-span-4 shadow-xl">
           <WelcomeCard />
         </div>
         <Card className="col-span-4 shadow-xl">
@@ -176,12 +176,12 @@ function Overview() {
 
       {/* Bottom Section */}
       <section className="w-full max-h-2/3  grid gap-4 px-4 md:grid-cols-2 lg:grid-cols-7 lg:gap-6 text-darkpurple">
-        <Card className=" max-h-2/3 col-span-4 flex flex-col items-center justify-center bg-purpleVariant-300 shadow-xl ">
+        <Card className=" max-h-2/3 col-span-4 flex flex-col items-center justify-center bg-purpleVariant-200 shadow-xl ">
           <CardHeader className="flex items-center text-2xl">
-            <CardTitle className="font-bold text-white text-3xl">
+            <CardTitle className="font-bold text-darkpurple text-3xl">
               Nutritional Profile
             </CardTitle>
-            <CardDescription className="flex items-center justify-center text-center text-white">
+            <CardDescription className="flex items-center justify-center text-center text-darkpurple">
               Start with the calories and macros below, and take the first step
               toward crushing your goal. Let&apos;s make it happen!
             </CardDescription>
@@ -227,7 +227,7 @@ function Overview() {
             </section>
           </CardContent>
           <CardFooter>
-            <div className="text-center text-sm text-white">
+            <div className="text-center text-sm text-darkpurple">
               <p>
                 These results are based on the information you provided, so they
                 are estimates. Track your progress and make changes as needed to

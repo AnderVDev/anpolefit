@@ -42,21 +42,21 @@ const Chat: React.FC = () => {
   };
 
   return (
-    <Card className="col-span-3 flex flex-col items-center justify-center bg-purpleVariant-300 shadow-xl">
+    <Card className="col-span-3 flex flex-col items-center justify-center bg-purpleVariant-100 shadow-xl">
       <div
       className={cn(
-        "bg-card text-darkpurple rounded-lg p-4 flex flex-col h-full w-full  bg-purpleVariant-300 shadow-xl"
+        "bg-card text-darkpurple rounded-lg p-4 flex flex-col h-full w-full  bg-purpleVariant-200 shadow-xl"
       )}
     >
       {/* Messages Section */}
-      <div className="flex-1 overflow-y-auto space-y-3 p-4 border rounded-md bg-purpleLight-100">
+      <div className="flex-1 overflow-y-auto space-y-3 p-4 border rounded-md bg-purpleVariant-100">
         {messages.map((message) => (
           <div
             key={message.id}
             className={cn("p-3 rounded-lg", {
-              "bg-darkpurple text-white self-end":
+              "bg-purpleVariant-600 text-white self-end":
                 message.sender === "user",
-              "bg-muted text-muted-foreground self-start":
+              "bg-muted text-darhpurple self-start":
                 message.sender === "assistant",
             })}
           >

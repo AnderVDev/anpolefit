@@ -47,7 +47,7 @@ export function RadialChart({
   const config = chartConfig || defaultChartConfig;
   return (
     <section className="flex flex-col items-center justify-center w-28 h-40 p-0 m-0">
-      <h4 className="font-bold text-white">{name}</h4>
+      <h4 className="font-bold text-darkpurple">{name}</h4>
       <ChartContainer config={config} className="w-28 h-24  ">
         <RadialBarChart
           data={chartContent}
