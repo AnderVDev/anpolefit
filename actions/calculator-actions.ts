@@ -95,7 +95,11 @@ export const getNutritionProfileCurrentUser = async (userId: string) => {
     const existingNutritionProfile = await getNutritionProfileByUserId(userId);
 
     if (!existingNutritionProfile) {
-      return { error: "Invalid Nutrition Profile." };
+      return {
+        success: false,
+        message: "Invalid Nutrition Profile.",
+        data: existingNutritionProfile,
+      };
     }
 
     return {

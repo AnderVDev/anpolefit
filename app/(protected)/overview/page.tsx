@@ -1,20 +1,14 @@
 "use client";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import React, { useEffect, useState } from "react";
 import WelcomeCard from "./_components/welcome-card";
 import Weekly from "./_components/weekly-calendar";
 import Chat from "./_components/chat";
-import { RadialChart } from "@/components/CaloriesChart";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { getNutritionProfileCurrentUser } from "@/actions/calculator-actions";
 import PremiumFeatureUpgrade from "@/components/premiun-feature";
+import NutritionalProfile from "./_components/nutritional-profile";
+import NutritionalDataMsg from "@/app/(protected)/overview/_components/fill-nutrition-profile";
 
 // Helper functions
 const getWeekLabel = (date: Date): string => {
@@ -83,6 +77,8 @@ function Overview() {
   const [selectedDays, setSelectedDays] = useState<number[]>([]);
   const currentUser = useCurrentUser();
   const isCurrentUserAdmin = currentUser?.role === "ADMIN";
+  const [isNutritionProfileAvailable, setIsNutritionProfileAvailable] =
+    useState<boolean | undefined>(false);
   const [nutritionData, setNutritionData] = useState<NutritionData | null>(
     null
   );
@@ -93,6 +89,7 @@ function Overview() {
       const response = await getNutritionProfileCurrentUser(currentUser.id);
       console.log(response);
       setNutritionData(response?.data ?? null);
+      setIsNutritionProfileAvailable(response?.success);
     } catch (error) {
       console.error("Failed to fetch nutrition profile:", error);
     }
@@ -176,66 +173,15 @@ function Overview() {
 
       {/* Bottom Section */}
       <section className="w-full max-h-2/3  grid gap-4 px-4 md:grid-cols-2 lg:grid-cols-7 lg:gap-6 text-darkpurple">
-        <Card className=" max-h-2/3 col-span-4 flex flex-col items-center justify-center bg-purpleVariant-200 shadow-xl ">
-          <CardHeader className="flex items-center text-2xl">
-            <CardTitle className="font-bold text-darkpurple text-3xl">
-              Nutritional Profile
-            </CardTitle>
-            <CardDescription className="flex items-center justify-center text-center text-darkpurple">
-              Start with the calories and macros below, and take the first step
-              toward crushing your goal. Let&apos;s make it happen!
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex items-center">
-            <RadialChart
-              name="Total"
-              valueKcal={totalNutrition}
-              valueGrams={1}
-              total={totalNutrition}
-              chartData={[
-                { name: "TDCI", value: 100, fill: "hsl(var(--chart-2))" },
-              ]}
-              chartConfig={{
-                TDCI: { label: "Total", color: "hsl(var(--chart-2))" },
-              }}
-            />
-            <section className="flex flex-col items-center gap-4 p-4">
-              <div className="flex flex-wrap justify-center gap-4">
-                {formattedNutritionData.map((intake) => (
-                  <RadialChart
-                    key={intake.id}
-                    name={intake.name}
-                    valueKcal={intake.resultKcal}
-                    valueGrams={intake.resultGrams}
-                    total={intake.total}
-                    chartData={[
-                      {
-                        name: intake.name,
-                        value: (intake.resultKcal / intake.total) * 100,
-                        fill: `hsl(var(--chart-${intake.fill}))`,
-                      },
-                    ]}
-                    chartConfig={{
-                      [intake.name]: {
-                        label: intake.name,
-                        color: `hsl(var(--chart-${intake.fill}))`,
-                      },
-                    }}
-                  />
-                ))}
-              </div>
-            </section>
-          </CardContent>
-          <CardFooter>
-            <div className="text-center text-sm text-darkpurple">
-              <p>
-                These results are based on the information you provided, so they
-                are estimates. Track your progress and make changes as needed to
-                reach your goals.
-              </p>
-            </div>
-          </CardFooter>
-        </Card>
+        {isNutritionProfileAvailable ? (
+          <NutritionalProfile
+            formattedNutritionData={formattedNutritionData}
+            totalNutrition={totalNutrition}
+          />
+        ) : (
+          <NutritionalDataMsg />
+        )}
+
         {/* <Card className="col-span-3 flex items-center justify-center bg-lightturquoise border-solid border-lightturquoise border shadow-x">
           {isCurrentUserAdmin ? <Chat /> : <PremiumFeatureUpgrade />}
         </Card> */}
