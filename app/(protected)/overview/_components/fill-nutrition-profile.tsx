@@ -28,7 +28,7 @@ const NutritionalDataMsg: React.FC = () => {
         <CardContent>
           <p className="text-darkpurple">
             Take the first step toward better health by calculating your
-            nutritional profile. It's quick, easy, and provides valuable
+            nutritional profile. It&apos;s quick, easy, and provides valuable
             insights into your dietary needs.
           </p>
         </CardContent>
