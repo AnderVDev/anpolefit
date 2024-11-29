@@ -20,7 +20,7 @@ const Classes = ({
     <li className="relative mx-5 inline-block h-[380px] w-[450px]">
       <div className={overlayStyles}>
       <h1 className="text-2xl text-white font-black mb-1">{name}</h1>
-        <p className="mt-2 text-xl h-auto">{description}</p>
+        <p className="mt-2 text-lg h-auto leading-6">{description}</p>
       </div>
       <Image 
         src={image} 

@@ -53,7 +53,7 @@ export function NavUser({
             >
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage
-                  src={user.avatar || "/public/assets/Logo Anpolefit_1.png"}
+                  src={user.avatar || "/public/assets/LogoAnpolefit_14.png"}
                   alt={user.name || "avatar"}
                 />
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
@@ -75,7 +75,7 @@ export function NavUser({
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage
-                    src={user.avatar || "/public/assets/Logo Anpolefit_1.png"}
+                    src={user.avatar || "/public/assets/LogoAnpolefit_14.png"}
                     alt={user.name || "avatar"}
                   />
                   <AvatarFallback className="rounded-lg">CN</AvatarFallback>
