@@ -17,12 +17,11 @@ export default function SignUp() {
     <>
       <div
         style={{ backgroundImage: "url('/assets/background04c.jpg')" }}
-        className="bg-no-repeat bg-center-bottom bg-midpink h-full"
+        className="bg-no-repeat bg-right-top md:bg-center-bottom bg-midpink h-full"
       >
-        <div className="container relative hidden h-full flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0 bg-transparent">
+        <div className="container relative h-full flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0 bg-transparent">
           {/* Left side */}
-          <div className="relative hidden h-full flex-col p-10 text-white dark:border-r lg:flex bg-transparent">
-            <div className="absolute inset-0" />
+          <div className="relative h-full flex-col p-10 text-white dark:border-r lg:flex bg-transparent">
             <div className="relative z-20 flex items-center text-lg font-medium">
 
             <section className="bg-white bg-opacity-70 text-darkpurple p-5 rounded-2xl">
