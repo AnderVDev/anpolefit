@@ -198,7 +198,7 @@ function StepFour() {
   return (
     <div className="flex flex-col items-center justify-center">
       <Card className="flex flex-col p-4 border border-gray-100 rounded-lg cursor-pointer items-center gap-2 w-96 h-96">
-        <CardTitle>Caloric Intakes</CardTitle>
+        <CardTitle className="font-bold text-2xl text-purpleVariant-700">Calories Intakes</CardTitle>
         <CardContent className="flex flex-col justify-center items-center">
           <RadialChart
             name="Total"
@@ -255,15 +255,19 @@ function StepFour() {
         </CardContent>
       </Card>
       <section className="flex gap-2 mt-2">
-        <Button className=" rounded-lg m-0 " type="button" onClick={decrement}>
+        <Button
+          className="rounded-lg m-0 hover:bg-purpleVariant-500  hover:text-white bg-white font-semibold  text-purpleVariant-700 "
+          type="button"
+          onClick={decrement}
+        >
           Back
         </Button>
         <Button
-          className=" rounded-lg"
+          className="rounded-lg m-0 bg-purpleVariant-700 font-semibold hover:bg-purpleVariant-500"
           onClick={HandleDataSave}
           disabled={isPending}
         >
-          {isPending && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
+          {isPending && <Icons.spinner className="mr-2 h-4 w-4 animate-spin " />}
           Save
         </Button>
       </section>

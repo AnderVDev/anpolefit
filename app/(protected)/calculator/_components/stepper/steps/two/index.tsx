@@ -107,10 +107,17 @@ function StepTwo() {
           )}
         />
         <section className="flex gap-2">
-          <Button className="rounded-lg m-0 " type="button" onClick={decrement}>
+          <Button
+            className="rounded-lg m-0 hover:bg-purpleVariant-500  hover:text-white bg-white font-semibold  text-purpleVariant-700 "
+            type="button"
+            onClick={decrement}
+          >
             Back
           </Button>
-          <Button className="rounded-lg m-0 " type="submit">
+          <Button
+            className="rounded-lg m-0 bg-purpleVariant-700 font-semibold hover:bg-purpleVariant-500 "
+            type="submit"
+          >
             Next
           </Button>
         </section>

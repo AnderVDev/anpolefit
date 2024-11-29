@@ -32,18 +32,18 @@ const Stepper = () => {
               <div
                 className={`absolute w-full h-[3px] right-2/4 top-1/3 -translate-y-2/4 ${
                   i + 1 < currentStep || complete
-                    ? "bg-primary-500"
-                    : "bg-gray-100"
+                    ? "bg-purpleVariant-700"
+                    : "bg-purpleVariant-200"
                 }`}
               />
             )}
             <div
-              className={`w-10 h-10 flex items-center justify-center z-10 relative rounded-full font-semibold text-gray-20  ${
+              className={`w-10 h-10 flex items-center justify-center z-10 relative rounded-full font-semibold text-white  ${
                 i + 1 < currentStep || complete
-                  ? "bg-primary-500"
+                  ? "bg-darkpurple"
                   : currentStep === i + 1
-                  ? "bg-gray-500"
-                  : "bg-gray-100"
+                  ? "bg-purpleVariant-700"
+                  : "bg-purpleVariant-200"
               }`}
             >
               {i + 1 < currentStep || complete ? <Check size={24} /> : i + 1}

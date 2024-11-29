@@ -27,7 +27,8 @@ export function RadialChart({
   chartData,
   chartConfig,
 }: RadialProgressProp) {
-  const intake = (valueKcal / total) * 100;
+  const intake = total !== 0 ? (valueKcal / total) * 100 : 0; // Prevent division by zero
+  // const intake = (valueKcal / total) * 100;
   // Ensure value is between 0 and 100
   const progressValue = Math.min(Math.max(intake, 0), 100); // Clamp value between 0 and 100
 
@@ -44,13 +45,17 @@ export function RadialChart({
   };
 
   const chartContent = chartData || defaultChartData;
+  const validatedChartContent = chartContent.map((item) => ({
+    ...item,
+    value: Number.isFinite(item.value) ? item.value : 0, // Ensure `value` is valid
+  }));
   const config = chartConfig || defaultChartConfig;
   return (
     <section className="flex flex-col items-center justify-center w-28 h-40 p-0 m-0">
-      <h4 className="font-bold text-darkpurple">{name}</h4>
+      <h4 className="font-bold text-purpleVariant-700">{name}</h4>
       <ChartContainer config={config} className="w-28 h-24  ">
         <RadialBarChart
-          data={chartContent}
+          data={validatedChartContent}
           startAngle={90}
           endAngle={450}
           innerRadius={30}

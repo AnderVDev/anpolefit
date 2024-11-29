@@ -100,16 +100,16 @@ function StepOne() {
           onSubmit={handleSubmit(onSubmit)}
           className="flex items-center justify-center flex-col flex-grow p-4 gap-2"
         >
-          <Card className="flex items-center justify-center flex-col flex-grow border border-gray-200 rounded-lg gap-2 px-2 m-0">
+          <Card className="flex items-center justify-center flex-col flex-grow bg-purpleLight-100 border border-purpleLight-100 shadow-2xl rounded-lg gap-2 px-2 m-0">
             <section className="w-60 mt-2 md:w-[590px] flex flex-col md:grid md:grid-cols-3 justify-between">
               <div className="items-center w-60 h-48 flex flex-col md:col-start-1 md:col-span-1 place-content-between  ">
-                <Card className="flex items-center flex-col border border-gray-200 rounded-lg cursor-pointer p-0 h-28 w-60">
+                <Card className="flex items-center flex-col border  border-purpleLight-100 shadow-xl rounded-lg cursor-pointer p-0 h-28 w-60">
                   <FormField
                     control={control}
                     name="gender"
                     render={({ field }) => (
                       <FormItem className="flex flex-col items-center justify-center my-2">
-                        <FormLabel className="text-base font-bold">
+                        <FormLabel className="text-base text-purpleVariant-700 font-bold">
                           Gender
                         </FormLabel>
                         <FormControl>
@@ -133,20 +133,20 @@ function StepOne() {
                   />
                 </Card>
 
-                <Card className="flex items-center justify-center flex-col md:flex-row border  md:gap-4 border-gray-200 rounded-lg cursor-pointer mt-2 p-0 h-28 md:h-24 w-60">
+                <Card className="flex items-center justify-center flex-col md:flex-row border  md:gap-4  rounded-lg cursor-pointer mt-2 p-0 h-28 md:h-24 w-60 border-purpleLight-100 shadow-xl">
                   <FormField
                     control={control}
                     name="age"
                     render={({ field }) => (
                       <FormItem className="flex flex-col items-center justify-center">
                         <div className="flex gap-1 items-center justify-center">
-                          <FormLabel className="text-base font-bold">
+                          <FormLabel className="text-base text-purpleVariant-700 font-bold">
                             Age
                           </FormLabel>
                           <FormControl className="">
                             <Input
                               type="number"
-                              className="w-14 h-8 p-2"
+                              className="w-16 h-8 p-2 border-spacing-1 border-purpleVariant-700 text-purpleVariant-700 focus-visible:ring-purpleVariant-700 font-semibold"
                               placeholder="age"
                               {...field}
                               onChange={(e) =>
@@ -164,7 +164,7 @@ function StepOne() {
               </div>
 
               {/* Metrics */}
-              <Card className="w-60 p-2 mt-2 md:mt-0 md:mr-1 flex items-center justify-center flex-col flex-grow md:w-80 md:h-48 mx-auto  md:col-end-4 md:col-span-2  border border-gray-200 rounded-lg cursor-pointer ">
+              <Card className="w-60 p-2 mt-2 md:mt-0 md:mr-1 flex items-center justify-center flex-col flex-grow md:w-[340px] md:h-48 mx-auto  md:col-end-4 md:col-span-2  border border-purpleLight-100 rounded-lg cursor-pointer shadow-xl">
                 <FormField
                   control={control}
                   name="metrics"
@@ -189,14 +189,14 @@ function StepOne() {
             </section>
 
             {/* Activities */}
-            <Card className=" w-60 h-auto mb-2 md:w-[590px] flex flex-col items-center justify-center border border-gray-200 rounded-lg cursor-pointer ">
+            <Card className=" w-60 h-auto mb-2 md:w-[590px] flex flex-col items-center justify-center border border-purpleLight-100 rounded-lg cursor-pointer shadow-xl ">
               <section className="w-60 md:w-[590px] grid grid-col-1 justify-between">
                 <FormField
                   control={control}
                   name="activity"
                   render={({ field }) => (
                     <FormItem className="w-60 md:w-[590px] flex flex-wrap flex-col items-center justify-center mb-1">
-                      <FormLabel className="mt-2 text-base font-bold">
+                      <FormLabel className="mt-2 text-base font-bold text-purpleVariant-700">
                         How Active Are You?
                       </FormLabel>
                       <FormControl className="grid grid-col-1 md:grid-cols-2 gap-1 m-1 p-1">
@@ -223,7 +223,7 @@ function StepOne() {
             </Card>
           </Card>
 
-          <Button className="rounded-lg m-0 " type="submit">
+          <Button className="rounded-lg m-0 bg-purpleVariant-700 font-semibold hover:bg-purpleVariant-500 " type="submit">
             Next
           </Button>
         </form>
