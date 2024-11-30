@@ -17,27 +17,27 @@ The home page showcases dynamic animations powered by **Framer Motion**, combine
 The login system offers flexibility and security, allowing users to sign in directly or use Google authentication.  
 This feature is powered by **NextAuth.js**, seamlessly integrated with **Prisma**.  
 
-![Project Screenshot](public/assets/Screenshot_Login.png)
+![Project Screenshot](public/assets/Screenshots_Login.png)
 
 ---
 
 ### **3.User Profile & Calculator**  
 The user profile includes a personalized calculator to input weight, height, and fitness goals. It dynamically evaluates the data, helping users track progress.
 
-![Project Screenshot](public/assets/Screenshot_UserProfile.png)
-![Project Screenshot](public/assets/Screenshot_Calculator.png)
+![Project Screenshot](public/assets/Screenshots_UserProfile.png)
+![Project Screenshot](public/assets/Screenshots_Calculator.png)
 
 ---
 
 ### **4.Data Visualization**  
 Users can track their progress through interactive charts powered by Recharts, offering a clear and responsive way to measure fitness achievements.
 
-![Project Screenshot](public/assets/Screenshot_chart.png)
+![Project Screenshot](public/assets/Screenshots_chart.png)
 
 ---
 
 ## Technologies Used
- - Next.js: Framework for server-rendered React applications.
+- Next.js: Framework for server-rendered React applications.
 - Tailwind CSS: Utility-first CSS framework for styling.
 - Framer Motion: Library for smooth animations and transitions.
 - NextAuth.js: Secure and flexible authentication.
