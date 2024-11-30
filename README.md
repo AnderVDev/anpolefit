@@ -9,7 +9,7 @@ Anpolefit is a modern web application built to guide users on their fitness jour
 ### **1. Home Page**  
 The home page showcases dynamic animations powered by **Framer Motion**, combined with a sleek, responsive design using **Tailwind CSS**.
 
-![Project Screenshot](public/assets/Screenshot_Home.png)  
+![Project Screenshot](public/assets/Screenshots_Home.png)  
 
 ---
 
